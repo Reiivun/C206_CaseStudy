@@ -92,7 +92,7 @@ public class C206_CaseStudy {
 	}
 
 public static void menu() {
-	ResourceCentre.setHeader("RESOURCE CENTRE APP");
+	C206_CaseStudy.setHeader("RESOURCE CENTRE APP");
 	System.out.println("1. Display Inventory");
 	System.out.println("2. Add item");
 	System.out.println("3. Loan item");
