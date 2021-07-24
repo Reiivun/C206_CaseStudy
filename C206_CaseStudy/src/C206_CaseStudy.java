@@ -14,18 +14,16 @@ public class C206_CaseStudy {
 
 		while (option != 5) {
 
-			ResourceCentre.menu();
+			C206_CaseStudy.menu();
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
 				// View all items
-				ResourceCentre.viewAllCamcorder(camcorderList);
-				ResourceCentre.viewAllChromebook(chromebookList);
-
+				C206_CaseStudy.viewAllStudent(studentList);
 			} else if (option == 2) {
 				// Add a new item
-				ResourceCentre.setHeader("ADD");			
-				ResourceCentre.setHeader("ITEM TYPES");
+				C206_CaseStudy.setHeader("ADD");			
+				C206_CaseStudy.setHeader("ITEM TYPES");
 				System.out.println("1. Camcorder");
 				System.out.println("2. Chromebook");
 				
@@ -108,19 +106,9 @@ public static void setHeader(String header) {
 	Helper.line(80, "-");
 }
 
-public static String showAvailability(boolean isAvailable) {
-	String avail;
-
-	if (isAvailable == true) {
-		avail = "Yes";
-	} else {
-		avail = "No";
-	}
-	return avail;
-}
 
 //================================= Option 1 View items (CRUD- Read) =================================
-public static String retrieveAllCamcorder(ArrayList<Camcorder> camcorderList) {
+public static String retrieveAllStudent(ArrayList<StudentList> camcorderList) {
 	String output = "";
 	if (camcorderList.size() != 0) {
 	for (int i = 0; i < camcorderList.size(); i++) {
@@ -135,35 +123,11 @@ public static String retrieveAllCamcorder(ArrayList<Camcorder> camcorderList) {
 	}
 	return output;
 }
-public static void viewAllCamcorder(ArrayList<Camcorder> camcorderList) {
-	ResourceCentre.setHeader("CAMCORDER LIST");
+public static void viewAllStudent(ArrayList<StudentList> camcorderList) {
+	C206_CaseStudy.setHeader("CAMCORDER LIST");
 	String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "ASSET TAG", "DESCRIPTION",
 			"AVAILABLE", "DUE DATE","OPTICAL ZOOM");
 	 output += retrieveAllCamcorder(camcorderList);	
-	System.out.println(output);
-}
-//
-public static String retrieveAllChromebook(ArrayList<Chromebook> chromebookList) {
-	String output = "";
-	
-	if (chromebookList.size() != 0) {
-	for (int i = 0; i < chromebookList.size(); i++) {
-
-		output += String.format("%-10s %-30s %-10s %-10s %-20s\n", chromebookList.get(i).getAssetTag(),
-				chromebookList.get(i).getDescription(), 
-				ResourceCentre.showAvailability(chromebookList.get(i).getIsAvailable()),
-				chromebookList.get(i).getDueDate(),chromebookList.get(i).getOs());
-	}
-	} else {
-			System.out.println("Chromebook inventory is empty.");
-	}
-	return output;
-}
-public static void viewAllChromebook(ArrayList<Chromebook> chromebookList) {
-	ResourceCentre.setHeader("CHROMEBOOK LIST");
-	String output = String.format("%-10s %-30s %-10s %-10s %-20s\n", "ASSET TAG", "DESCRIPTION",
-			"AVAILABLE", "DUE DATE","OS");
-	output += retrieveAllChromebook(chromebookList);
 	System.out.println(output);
 }
 
