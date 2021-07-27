@@ -8,11 +8,20 @@ public class C206_CaseStudy {
 	
 	public static void main(String args[]) {
 
+
+		ArrayList<StudentList> studentList = new ArrayList<StudentList>();
+		ArrayList<CCA> ccaList = new ArrayList<CCA>();
+
+	
 		
+		ccaList.add(new CCA("Sports","Sports include rock climbing,swimming and many more",10,"Monday",3.00,5.00,"Field","Thomas"));
+		ccaList.add(new CCA("Music","Play instruments like guitar , piano and many more",30,"Wednesday",3.00,6.00,"Music room","Willy"));
+		ccaList.add(new CCA("Photography","Experience to take photographs",25,"Friday",2.30,5.00,"Photography room","Annie"));
 
 		studentList.add(new StudentList(1, "1", "Amy", 1));
 		studentList.add(new StudentList(2, "2", "Tom", 4));
 		studentList.add(new StudentList(3,"3","Sean", 2));
+
 
 	}
 
@@ -77,5 +86,38 @@ public class C206_CaseStudy {
 			}
 		}
 		return isChecked;
+	}
+	
+	//CCA DETAILS
+	public static void addCCA(ArrayList<CCA> ccaList, CCA cc) {
+		
+		ccaList.add(cc);
+		System.out.println("CCA have been added");
+	}
+	
+	public static String retrieveAllCCA(ArrayList<CCA> ccaList) {
+		String output = "";
+
+		for (int i = 0; i < ccaList.size(); i++) {
+
+			output += String.format("%-10s %-30s %-10d %-10s %-20d %-20d %-10s %-10s\n",ccaList.get(i).getTitle(),
+					ccaList.get(i).getdescription(),ccaList.get(i).getClassSize(),ccaList.get(i).getDayOfTheWeek(),
+					ccaList.get(i).getStartTime(),ccaList.get(i).getEndTime(),ccaList.get(i).getVenue(),ccaList.get(i).getInstructorName());
+		}
+		return output;
+	}
+	public static void viewAllCCA(ArrayList<CCA> ccaList) {
+		String output = "===CCA DETAILS===";
+		output += String.format("%-10s %-30s %-10d %-10s %-20d %-20d %-10s %-10s\n", "NAME",
+				"DESCRIPTION", "CLASS SIZE","CCA DAY","START TIME","END TIME","VENUE","INSTRUCTOR");
+		 output += retrieveAllCCA(ccaList);	
+		System.out.println(output);
+	}
+		
+	
+	
+	public static void deleteCCA(ArrayList<CCA> ccaList, CCA cc) {
+		ccaList.remove(cc);
+		System.out.println("The CCA " + cc + " is successfully deleted.");
 	}
 }
