@@ -1,13 +1,18 @@
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
+	
+	static ArrayList<StudentList> studentList = new ArrayList<StudentList>();
+	static ArrayList<CCA> ccaList = new ArrayList<CCA>();
+	
+	
 	public static void main(String args[]) {
 
-		ArrayList<StudentList> studentList = new ArrayList<StudentList>();
+		
 
-		studentList.add(new StudentList("Amy", 1));
-		studentList.add(new StudentList("Tom", 4));
-		studentList.add(new StudentList("Sean", 2));
+		studentList.add(new StudentList(1, "1", "Amy", 1));
+		studentList.add(new StudentList(2, "2", "Tom", 4));
+		studentList.add(new StudentList(3,"3","Sean", 2));
 
 	}
 
@@ -40,5 +45,26 @@ public class C206_CaseStudy {
 	public static void deleteStudent(ArrayList<StudentList> studentList, StudentList s) {
 		studentList.remove(s);
 		System.out.println("Student " + s + " is deleted.");
+	}
+	
+	public static void ccaDisplay() {
+		for(int i = 0; i < ccaList.size(); i++) {
+			if(!(ccaList.get(i).getTitle().isEmpty())) {
+				System.out.println((i+1) + ". " + ccaList.get(i).getTitle());
+			}
+		}
+	}
+	
+	public static boolean loginCheck(int id, String password) {
+		boolean isChecked = false;
+		for(int i = 0; i < studentList.size(); i++) {
+			if(!(studentList.get(i).getName().isEmpty())) {
+				if((studentList.get(i).getID() == id) && (studentList.get(i).getPassword().equalsIgnoreCase(password))) {
+					isChecked = true;
+					break;
+				}
+			}
+		}
+		return isChecked;
 	}
 }

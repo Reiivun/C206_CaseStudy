@@ -10,12 +10,28 @@
  */
 
 public class StudentList {
+	private int id;
+	private String password;
 	private String name;
 	private int primary;
 	
-	public StudentList(String name, int primary) {
+	public StudentList(int id, String password, String name, int primary) {
+		this.id = id;
+		this.password = password;
 		this.name = name;
 		this.primary = primary;
+	}
+	
+	public int getID() {
+		return id;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String newPassword) {
+		password = newPassword;
 	}
 
 	public String getName() {
