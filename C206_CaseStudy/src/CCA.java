@@ -12,14 +12,14 @@
 public class CCA {
 	private String title;
 	private String description;
-	private String classSize;
+	private int classSize;
 	private String dayOfTheWeek;
 	private Double startTime;
 	private Double endTime;
 	private String venue; 
 	private String instructorName;
 	
-	public CCA(String title, String description, String classSize, String dayOfTheWeek, double startTime, double endTime, String venue, String instructorName) {
+	public CCA(String title, String description, int classSize, String dayOfTheWeek, double startTime, double endTime, String venue, String instructorName) {
 		this.title = title;
 		this.description = description;
 		this.classSize = classSize;
@@ -48,11 +48,11 @@ public class CCA {
 	}
 	
 	
-	public String getClassSize() {
+	public int getClassSize() {
 		return classSize;
 	}
 	
-	public void setClassSize(String newClassSize) {
+	public void setClassSize(int newClassSize) {
 		classSize = newClassSize;
 	}
 	
