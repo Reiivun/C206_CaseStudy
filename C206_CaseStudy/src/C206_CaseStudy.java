@@ -43,8 +43,17 @@ public class C206_CaseStudy {
 	}
 	
 	public static void deleteStudent(ArrayList<StudentList> studentList, StudentList s) {
-		studentList.remove(s);
-		System.out.println("Student " + s + " is deleted.");
+		if (studentList.size() != 0) {
+			for (int i = 0; i < studentList.size(); i++) {
+				if (studentList.get(i) != s) {
+					System.out.println("No students in list to delete.");
+				}
+			}
+		} else {
+			studentList.remove(s);
+			System.out.println("Student " + s + " is deleted.");
+		}
+		
 	}
 	
 	public static void ccaDisplay() {
