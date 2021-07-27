@@ -4,7 +4,7 @@ public class C206_CaseStudy {
 	
 	static ArrayList<StudentList> studentList = new ArrayList<StudentList>();
 	static ArrayList<CCA> ccaList = new ArrayList<CCA>();
-	a
+	
 	
 	public static void main(String args[]) {
 
