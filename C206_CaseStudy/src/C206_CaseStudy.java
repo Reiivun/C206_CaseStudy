@@ -45,13 +45,15 @@ public class C206_CaseStudy {
 	public static void deleteStudent(ArrayList<StudentList> studentList, StudentList s) {
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
-				if (studentList.get(i) != s) {
-					System.out.println("No students in list to delete.");
+				if (studentList.get(i) == s) {
+					studentList.remove(s);
+					System.out.println("Student " + s + " is deleted.");
+				} else {
+					System.out.println("Input does not match any of the students in the list.");
 				}
 			}
 		} else {
-			studentList.remove(s);
-			System.out.println("Student " + s + " is deleted.");
+			System.out.println("No students in list to delete.");
 		}
 		
 	}
