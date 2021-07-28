@@ -119,4 +119,36 @@ public class C206_CaseStudy {
 		ccaList.remove(cc);
 		System.out.println("The CCA " + cc + " is successfully deleted.");
 	}
+	
+	public static ArrayList<String> addStudentCCA(String name, String cca){
+		//assuming already logged in
+		//creating available CCA array for student
+		ArrayList<String> studentCCAlist = new ArrayList<String>();
+		studentCCAlist.set(0, name);
+		if (ccaList.size() != 0) {
+			for (int i = 0; i < ccaList.size(); i++) {
+				if(ccaList.get(i).getTitle().equalsIgnoreCase(name)) {
+					studentCCAlist.add(ccaList.get(i).getTitle());
+					break;
+				}
+			}
+		}
+		
+		return studentCCAlist;
+	}
+	
+	public static ArrayList<String> dropStudentCCA(ArrayList<String> studentCCAlist, String cca){
+		//assuming already logged in
+		if (studentCCAlist.size() != 0) {
+			//index 0 is student name
+			for (int i = 1; i < studentCCAlist.size(); i++) {
+				if(studentCCAlist.get(i).equalsIgnoreCase(cca)) {
+					studentCCAlist.remove(i);
+					break;
+				}
+			}
+		}
+		return studentCCAlist;
+	
+	}
 }
