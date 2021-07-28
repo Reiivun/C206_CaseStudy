@@ -14,12 +14,22 @@ public class StudentList {
 	private String password;
 	private String name;
 	private int primary;
+	private String parentname;
+	
 	
 	public StudentList(int id, String password, String name, int primary) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.primary = primary;
+	}
+	
+	public StudentList(int id, String password, String name, int primary, String parentname) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.primary = primary;
+		this.parentname = parentname;
 	}
 	
 	public int getID() {
@@ -48,6 +58,14 @@ public class StudentList {
 
 	public void setPrimary(int primary) {
 		this.primary = primary;
+	}
+	
+	public String getparentName() {
+		return parentname;
+	}
+
+	public void setparentName(String parentname) {
+		this.parentname = parentname;
 	}
 	
 }
