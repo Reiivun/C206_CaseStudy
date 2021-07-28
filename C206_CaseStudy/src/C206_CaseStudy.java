@@ -20,8 +20,11 @@ public class C206_CaseStudy {
 		studentList.add(new StudentList(1, "1", "Amy", 1));
 		studentList.add(new StudentList(2, "2", "Tom", 4));
 		studentList.add(new StudentList(3, "3", "Sean", 2));
-
+		
+	
 	}
+	
+	
 
 	public static String retrieveAllStudent(ArrayList<StudentList> studentList) {
 		String output = "";
@@ -30,11 +33,27 @@ public class C206_CaseStudy {
 
 				output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getPrimary());
 			}
-		} else {
+		}
+		else {
 			System.out.println("No students in list.");
 		}
 		return output;
 	}
+	
+	public static String retrieveAllParent(ArrayList<StudentList> studentList) {
+		String output = "";
+		if (studentList.size() != 0) {
+			for (int i = 0; i < studentList.size(); i++) {
+
+				output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getparentName());
+			}
+		}
+		else {
+			System.out.println("No parents in list.");
+		}
+		return output;
+	}
+	
 
 	public static void viewAllStudent(ArrayList<StudentList> studentList) {
 		System.out.println("STUDENT LIST");
@@ -43,6 +62,15 @@ public class C206_CaseStudy {
 		System.out.println(output);
 
 	}
+	
+	public static void viewAllParent(ArrayList<StudentList> studentList) {
+		System.out.println("PARENT LIST");
+		String output = String.format("%-10s %-20s\n", "NAME", "PARENTS NAME");
+		output += retrieveAllStudent(studentList);
+		System.out.println(output);
+
+	}
+	
 
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
 		studentList.add(s);
@@ -55,11 +83,13 @@ public class C206_CaseStudy {
 				if (studentList.get(i) == s) {
 					studentList.remove(s);
 					System.out.println("Student " + s + " is deleted.");
-				} else {
+				}
+				else {
 					System.out.println("Input does not match any of the students in the list.");
 				}
 			}
-		} else {
+		}
+		else {
 			System.out.println("No students in list to delete.");
 		}
 
