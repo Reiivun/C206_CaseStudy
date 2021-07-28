@@ -30,7 +30,6 @@ public class C206_CaseStudy {
 		String output = "";
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
-
 				output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getPrimary());
 			}
 		}
@@ -38,40 +37,15 @@ public class C206_CaseStudy {
 			System.out.println("No students in list.");
 		}
 		return output;
-	}
-	
-	public static String retrieveAllParent(ArrayList<StudentList> studentList) {
-		String output = "";
-		if (studentList.size() != 0) {
-			for (int i = 0; i < studentList.size(); i++) {
-
-				output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getparentName());
-			}
-		}
-		else {
-			System.out.println("No parents in list.");
-		}
-		return output;
-	}
-	
+	}	
 
 	public static void viewAllStudent(ArrayList<StudentList> studentList) {
 		System.out.println("STUDENT LIST");
 		String output = String.format("%-10s %-20s\n", "NAME", "PRIMARY");
 		output += retrieveAllStudent(studentList);
 		System.out.println(output);
-
 	}
 	
-	public static void viewAllParent(ArrayList<StudentList> studentList) {
-		System.out.println("PARENT LIST");
-		String output = String.format("%-10s %-20s\n", "NAME", "PARENTS NAME");
-		output += retrieveAllStudent(studentList);
-		System.out.println(output);
-
-	}
-	
-
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
 		studentList.add(s);
 		System.out.println("Student " + s + " is added.");
@@ -116,7 +90,54 @@ public class C206_CaseStudy {
 		}
 		return isChecked;
 	}
+	
+	
+	
+	//Parents
+	public static String retrieveAllParent(ArrayList<StudentList> studentList) {
+		String output = "";
+		if (studentList.size() != 0) {
+			for (int i = 0; i < studentList.size(); i++) {
+				output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getparentName());
+			}
+		}
+		else {
+			System.out.println("No parents in list.");
+		}
+		return output;
+	}
+	
+	public static void viewAllParent(ArrayList<StudentList> studentList) {
+		System.out.println("PARENT LIST");
+		String output = String.format("%-10s %-20s\n", "NAME", "PARENTS NAME");
+		output += retrieveAllStudent(studentList);
+		System.out.println(output);
+	}
+	
+	public static void addParent(ArrayList<StudentList> studentList, StudentList s) {
+		studentList.add(s);
+		System.out.println("Parent " + s + " is added.");
+	}
+	
+	public static void deleteParent(ArrayList<StudentList> studentList, StudentList s) {
+		if (studentList.size() != 0) {
+			for (int i = 0; i < studentList.size(); i++) {
+				if (studentList.get(i) == s) {
+					studentList.remove(s);
+					System.out.println("Parent " + s + " is deleted.");
+				}
+				else {
+					System.out.println("Input does not match any of the parents in the list.");
+				}
+			}
+		}
+		else {
+			System.out.println("No parents in list to delete.");
+		}
+	}
+	
 
+	
 	// CCA DETAILS
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cc) {
 
