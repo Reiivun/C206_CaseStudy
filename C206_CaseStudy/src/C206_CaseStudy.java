@@ -1,3 +1,4 @@
+  
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
@@ -19,9 +20,9 @@ public class C206_CaseStudy {
 		ccaList.add(new CCA("Photography", "Experience to take photographs", 25, "Friday", 2.30, 5.00,
 				"Photography room", "Annie"));
 
-		studentList.add(new StudentList(1, "1", "Amy", 1));
-		studentList.add(new StudentList(2, "2", "Tom", 4));
-		studentList.add(new StudentList(3, "3", "Sean", 2));
+		studentList.add(new StudentList(1, "1", "Amy", "admin"));
+		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James"));
+		studentList.add(new StudentList(3, "3", "Sean", "member", 3, "Woman"));
 		
 	
 	}
@@ -46,7 +47,9 @@ public class C206_CaseStudy {
 		String output = "";
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
-				output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getPrimary());
+				if(studentList.get(i).getRole()=="member") {
+					output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getPrimary());
+				}
 			}
 		}
 		else {
@@ -59,8 +62,10 @@ public class C206_CaseStudy {
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
 				if (studentList.get(i) == s) {
-					studentList.remove(s);
-					System.out.println("Student " + s + " is deleted.");
+					if(studentList.get(i).getRole()=="member") {
+						studentList.remove(s);
+						System.out.println("Student " + s + " is deleted.");
+					}
 				}
 				else {
 					System.out.println("Input does not match any of the students in the list.");
@@ -102,7 +107,9 @@ public class C206_CaseStudy {
 		String output = "";
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
-				output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getparentName());
+				if(studentList.get(i).getRole()=="member") {
+					output += String.format("%-10s %-20d\n", studentList.get(i).getName(), studentList.get(i).getparentName());
+				}
 			}
 		}
 		else {
@@ -114,7 +121,7 @@ public class C206_CaseStudy {
 	public static void viewAllParent(ArrayList<StudentList> studentList) {
 		System.out.println("PARENT LIST");
 		String output = String.format("%-10s %-20s\n", "NAME", "PARENTS NAME");
-		output += retrieveAllStudent(studentList);
+		output += retrieveAllParent(studentList);
 		System.out.println(output);
 	}
 	
@@ -127,8 +134,11 @@ public class C206_CaseStudy {
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
 				if (studentList.get(i) == s) {
-					studentList.remove(s);
-					System.out.println("Parent " + s + " is deleted.");
+					if(studentList.get(i).getRole()=="member") {
+						studentList.remove(s);
+						System.out.println("Parent " + s + " is deleted.");
+					}
+					
 				}
 				else {
 					System.out.println("Input does not match any of the parents in the list.");

@@ -13,21 +13,23 @@ public class StudentList {
 	private int id;
 	private String password;
 	private String name;
+	private String role;
 	private int primary;
 	private String parentname;
 	
 	
-	public StudentList(int id, String password, String name, int primary) {
+	public StudentList(int id, String password, String name, String role) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
-		this.primary = primary;
+		this.role = role;
 	}
 	
-	public StudentList(int id, String password, String name, int primary, String parentname) {
+	public StudentList(int id, String password, String name, String role, int primary, String parentname) {
 		this.id = id;
 		this.password = password;
 		this.name = name;
+		this.role = role;
 		this.primary = primary;
 		this.parentname = parentname;
 	}
@@ -66,6 +68,10 @@ public class StudentList {
 
 	public void setparentName(String parentname) {
 		this.parentname = parentname;
+	}
+	
+	public String getRole() {
+		return role;
 	}
 	
 }
