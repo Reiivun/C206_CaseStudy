@@ -27,7 +27,21 @@ public class C206_CaseStudy {
 	}
 	
 	
+	
+	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
+		studentList.add(s);
+		System.out.println("Student " + s + " is added.");
+	}
+	
+	
 
+	public static void viewAllStudent(ArrayList<StudentList> studentList) {
+		System.out.println("STUDENT LIST");
+		String output = String.format("%-10s %-20s\n", "NAME", "PRIMARY");
+		output += retrieveAllStudent(studentList);
+		System.out.println(output);
+	}
+	
 	public static String retrieveAllStudent(ArrayList<StudentList> studentList) {
 		String output = "";
 		if (studentList.size() != 0) {
@@ -39,20 +53,8 @@ public class C206_CaseStudy {
 			System.out.println("No students in list.");
 		}
 		return output;
-	}	
-
-	public static void viewAllStudent(ArrayList<StudentList> studentList) {
-		System.out.println("STUDENT LIST");
-		String output = String.format("%-10s %-20s\n", "NAME", "PRIMARY");
-		output += retrieveAllStudent(studentList);
-		System.out.println(output);
 	}
 	
-	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
-		studentList.add(s);
-		System.out.println("Student " + s + " is added.");
-	}
-
 	public static void deleteStudent(ArrayList<StudentList> studentList, StudentList s) {
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
