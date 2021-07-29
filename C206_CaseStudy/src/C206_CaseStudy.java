@@ -4,6 +4,8 @@ public class C206_CaseStudy {
 
 	static ArrayList<StudentList> studentList = new ArrayList<StudentList>();
 	static ArrayList<CCA> ccaList = new ArrayList<CCA>();
+	
+	private static final int OPTION_VIEW = 1;
 
 	public static void main(String args[]) {
 
