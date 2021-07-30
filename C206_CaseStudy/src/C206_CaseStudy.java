@@ -167,19 +167,25 @@ public class C206_CaseStudy {
 						System.out.println("DELETE CCA");
 						Helper.line(30, "-");
 						
-						int parentID = Helper.readInt("Enter id: ");
+						int userID = Helper.readInt("Enter id: ");
 						
-						if (parentID<1) {
-							System.out.println("Invalid id");
+						int index = 0;
+						for(int i = 0; i < studentList.size(); i++) {
+							if(studentList.get(i).getID() == userID) {
+								index = i;
+								break;
+							}
+						}
+						if(studentList.get(index).getRole()=="member") {
+							studentList.get(index).setparentName("");
+							System.out.println("Deleted Parent name");
 						}
 						else {
-							int index = 0;
-							for(int i=0;i<studentList.size();i++) {
-								if(studentList.get(i).getID()==parentID) {
-									studentList.get(i).setparentName("");
-								}
-							}	
+							System.out.println("Wrong account used!");
 						}
+						
+						
+						
 					} 
 					else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
