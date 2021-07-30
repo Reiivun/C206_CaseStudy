@@ -113,17 +113,46 @@ public class C206_CaseStudy {
 						System.out.println("DELETE CCA");
 						Helper.line(30, "-");
 						
+						int ccaId = Helper.readInt("Enter CCA ID: ");
 						
-
+						if(ccaId<1) {
+							System.out.println("Empty inputs");
+						}
+						else {
+							ccaList.remove(ccaId);
+							System.out.println("CCA is deleted successfully");
+						}
+						
 					} 
 					else if (staffChoice == OPTION_VIEW_PARENT) {
+						Helper.line(30, "-");
+						System.out.println("VIEW PARENT");
+						Helper.line(30, "-");
+						
+						viewAllParent(studentList);
 
 					} 
 					else if (staffChoice == OPTION_ADD_PARENT) {
 
 					} 
 					else if (staffChoice == OPTION_DELETE_PARENT) {
-
+						Helper.line(30, "-");
+						System.out.println("DELETE CCA");
+						Helper.line(30, "-");
+						
+						int parentID = Helper.readInt("Enter id: ");
+						
+						if (parentID<1) {
+							System.out.println("Invalid id");
+						}
+						else {
+							int index = 0;
+							for(int i=0;i<studentList.size();i++) {
+								if(studentList.get(i).getID()==parentID) {
+									studentList.get(i).setparentName("");
+								}
+							}	
+						}
 					} 
 					else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
@@ -197,7 +226,7 @@ public class C206_CaseStudy {
 			for (int i = 0; i < studentList.size(); i++) {
 				if (studentList.get(i) == s) {
 					if (studentList.get(i).getRole() == "member") {
-						studentList.remove(s);
+						s.setparentName("");
 						System.out.println("Student " + s + " is deleted.");
 					}
 				} else {
@@ -237,7 +266,7 @@ public class C206_CaseStudy {
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
 				if (studentList.get(i).getRole() == "member") {
-					output += String.format("%-10s %-20d\n", studentList.get(i).getName(),
+					output += String.format("%-15s %-15s\n", studentList.get(i).getName(),
 							studentList.get(i).getparentName());
 				}
 			}
@@ -249,7 +278,7 @@ public class C206_CaseStudy {
 
 	public static void viewAllParent(ArrayList<StudentList> studentList) {
 		System.out.println("PARENT LIST");
-		String output = String.format("%-10s %-20s\n", "NAME", "PARENTS NAME");
+		String output = String.format("%-15s %-15s\n", "STUDENT NAME", "PARENTS NAME");
 		output += retrieveAllParent(studentList);
 		System.out.println(output);
 	}
@@ -264,7 +293,7 @@ public class C206_CaseStudy {
 			for (int i = 0; i < studentList.size(); i++) {
 				if (studentList.get(i) == s) {
 					if (studentList.get(i).getRole() == "member") {
-						studentList.remove(s);
+						studentList.get(i).setparentName("");
 						System.out.println("Parent " + s + " is deleted.");
 					}
 
