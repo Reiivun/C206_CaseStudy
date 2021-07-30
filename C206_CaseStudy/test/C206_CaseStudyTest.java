@@ -90,14 +90,14 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that viewAllStudent", testOutput, allStudent);
 		
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
-		C206_CaseStudy.addStudent(studentList, sl1);
 		C206_CaseStudy.addStudent(studentList, sl2);
+		C206_CaseStudy.addStudent(studentList, sl3);
 		assertEquals("Test that Student arraylist size is 2", 2, studentList.size());
 		
 		//test if the expected output string same as the list of student retrieved from the SourceCentre	
 		allStudent= C206_CaseStudy.retrieveAllStudent(studentList);
-		testOutput = String.format("%-10s %-30s %-10s %-10s %-20s\n","1", "Amy", "Yes", "", "1","James");
-		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s\n","2", "Tom", "Yes", "", "3","Woman" );
+		testOutput = String.format("%-10s %-20d\n", "Tom", 1);
+		testOutput += String.format("%-10s %-20d\n", "Sean", 3);
 	
 		assertEquals("Test that viewAllStudent", testOutput, allStudent);
 		
@@ -120,11 +120,11 @@ public class C206_CaseStudyTest {
 		
 		//test if the expected output string same as the list of student retrieved from the SourceCentre	
 		allCCA= C206_CaseStudy.retrieveAllCCA(ccaList);
-		testOutput = String.format("%-10s %-30s %-10s %-10s %-20s %-20.2f %-20.2f %-10s %-10s  \n","1", "Sports", "Yes", "", "Monday",3.00, 5.00,
+		testOutput = String.format("%-10d %-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", 1, "Sports", "Rock climbing,swimming etc", 10, "Monday",3.00, 5.00,
 				"Field", "Thomas");
-		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s %-20.2f %-20.2f %-10s %-10s  \n","1", "Music", "Yes", "", "Wednesday",3.00, 6.00,
-				"Music Room", "Willy");
-	
+		testOutput += String.format("%-10d %-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", 2, "Music", "Chance to use different instruments", 30, "Wednesday",3.00, 6.00,
+				"Music room", "Willy");
+		
 		assertEquals("Test that viewAllCCA", testOutput, allCCA);
 		
 	}
