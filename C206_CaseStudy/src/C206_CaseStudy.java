@@ -20,12 +20,12 @@ public class C206_CaseStudy {
 	public static void main(String args[]) {
 
 
-		ccaList.add(new CCA("Sports", "Sports include rock climbing,swimming and many more", 10, "Monday", 3.00, 5.00,
+		ccaList.add(new CCA("Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00,
 				"Field", "Thomas"));
-		ccaList.add(new CCA("Music", "Play instruments like guitar , piano and many more", 30, "Wednesday", 3.00, 6.00,
+		ccaList.add(new CCA("Music", "Chance to use different instruments", 30, "Wednesday", 3.00, 6.00,
 				"Music room", "Willy"));
-		ccaList.add(new CCA("Photography", "Experience to take photographs", 25, "Friday", 2.30, 5.00,
-				"Photography room", "Annie"));
+		ccaList.add(new CCA("Photograph", "Experience to take photographs", 25, "Friday", 2.30, 5.00,
+				"Photo room", "Annie"));
 
 		studentList.add(new StudentList(1, "1", "Amy", "admin"));
 		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James"));
@@ -82,15 +82,38 @@ public class C206_CaseStudy {
 
 					} 
 					else if (staffChoice == OPTION_DELETE_STUDENT) {
+						Helper.line(30, "-");
+						System.out.println("DELETE STUDENT");
+						Helper.line(30, "-");
+						
+						int studentId = Helper.readInt("Enter a student ID: ");
+						
+						if(studentId<1) {
+							System.out.println("Empty inputs");
+						}
+						else {
+							studentList.remove(studentId);
+							System.out.println("Student is deleted successfully");
+						}
 
 					}
 					else if (staffChoice == OPTION_VIEW_CCA) {
-
+						Helper.line(30, "-");
+						System.out.println("VIEW CCA");
+						Helper.line(30, "-");
+						
+						viewAllCCA(ccaList);
+						
 					} 
 					else if (staffChoice == OPTION_ADD_CCA) {
-
+					
 					} 
 					else if (staffChoice == OPTION_DELETE_CCA) {
+						Helper.line(30, "-");
+						System.out.println("DELETE CCA");
+						Helper.line(30, "-");
+						
+						
 
 					} 
 					else if (staffChoice == OPTION_VIEW_PARENT) {
@@ -266,7 +289,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < ccaList.size(); i++) {
 
-			output += String.format("%-10s %-30s %-10d %-10s %-20d %-20d %-10s %-10s\n", ccaList.get(i).getTitle(),
+			output += String.format("%-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", ccaList.get(i).getTitle(),
 					ccaList.get(i).getdescription(), ccaList.get(i).getClassSize(), ccaList.get(i).getDayOfTheWeek(),
 					ccaList.get(i).getStartTime(), ccaList.get(i).getEndTime(), ccaList.get(i).getVenue(),
 					ccaList.get(i).getInstructorName());
@@ -276,7 +299,7 @@ public class C206_CaseStudy {
 
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
 		String output = "===CCA DETAILS===";
-		output += String.format("%-10s %-30s %-10d %-10s %-20d %-20d %-10s %-10s\n", "NAME", "DESCRIPTION",
+		output += String.format("\n%-10s %-35s %-10s %-10s %-10s %-10s %-15s %-10s\n", "NAME", "DESCRIPTION",
 				"CLASS SIZE", "CCA DAY", "START TIME", "END TIME", "VENUE", "INSTRUCTOR");
 		output += retrieveAllCCA(ccaList);
 		System.out.println(output);

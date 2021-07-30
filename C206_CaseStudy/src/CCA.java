@@ -1,15 +1,7 @@
-/*
- * I declare that this code was written by me. 
- * I will not copy or allow others to copy my code. 
- * I understand that copying code is considered as plagiarism.
- * 
- * Student Name: Liau Ke En
- * Student ID: 20027025
- * Class: C208
- * Date/Time created: Saturday 24-07-2021 18:07
- */
+
 
 public class CCA {
+	private int id;
 	private String title;
 	private String description;
 	private int classSize;
@@ -19,7 +11,8 @@ public class CCA {
 	private String venue; 
 	private String instructorName;
 	
-	public CCA(String title, String description, int classSize, String dayOfTheWeek, double startTime, double endTime, String venue, String instructorName) {
+	public CCA(int id,String title, String description, int classSize, String dayOfTheWeek, double startTime, double endTime, String venue, String instructorName) {
+		this.id=id;
 		this.title = title;
 		this.description = description;
 		this.classSize = classSize;
@@ -28,6 +21,10 @@ public class CCA {
 		this.endTime = endTime;
 		this.venue = venue;
 		this.instructorName = instructorName;
+	}
+	
+	public int getCcaId() {
+		return id;
 	}
 	
 	public String getTitle() {
