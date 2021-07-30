@@ -13,7 +13,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADD_CCA = 5;
 	private static final int OPTION_DELETE_CCA = 6;
 	private static final int OPTION_VIEW_PARENT = 7;
-	private static final int OPTION_ADD_PARENT = 8;
+	private static final int OPTION_UPDATE_PARENT = 8;
 	private static final int OPTION_DELETE_PARENT = 9;
 	private static final int OPTION_QUIT= 10;
 
@@ -106,6 +106,28 @@ public class C206_CaseStudy {
 						
 					} 
 					else if (staffChoice == OPTION_ADD_CCA) {
+						
+						Helper.line(30, "-");
+						System.out.println("ADD CCA");
+						Helper.line(30, "-");
+						
+						String title = Helper.readString("Enter CCA title: ");
+						String description = Helper.readString("Enter CCA description: ");
+						int classSize = Helper.readInt("Enter CCA classSize: ");
+						String dayOfTheWeek = Helper.readString("Enter CCA day: ");
+						int startTime = Helper.readInt("Enter CCA start time: ");
+						int endTime = Helper.readInt("Enter CCA end time: ");
+						String venue = Helper.readString("Enter CCA venue: ");
+						String instructorName = Helper.readString("Enter CCA instructor name: ");
+						
+						if(title.isEmpty() || description.isEmpty() || dayOfTheWeek.isEmpty() || venue.isEmpty() || instructorName.isEmpty()) {
+							System.out.println("Empty inputs!");
+						}
+						
+						else {
+							CCA newCCA = new CCA(ccaList.size(),title, description, classSize, dayOfTheWeek, startTime, endTime, venue, instructorName);
+							addCCA(ccaList, newCCA);
+						}
 					
 					} 
 					else if (staffChoice == OPTION_DELETE_CCA) {
@@ -119,7 +141,37 @@ public class C206_CaseStudy {
 					else if (staffChoice == OPTION_VIEW_PARENT) {
 
 					} 
-					else if (staffChoice == OPTION_ADD_PARENT) {
+					else if (staffChoice == OPTION_UPDATE_PARENT) {
+						
+						Helper.line(30, "-");
+						System.out.println("UPDATE PARENT");
+						Helper.line(30, "-");
+						
+						int userID = Helper.readInt("Enter id: ");
+						int index = 0;
+						for(int i = 0; i < studentList.size(); i++) {
+							if(studentList.get(i).getID() == userID) {
+								index = i;
+								break;
+							}
+						}
+						
+						String parentName = Helper.readString("Enter Parent Name: ");
+						
+						if(parentName.isEmpty()) {
+							System.out.println("Empty inputs!");
+						}
+						else {
+							if(studentList.get(index).getRole()=="member") {
+								studentList.get(index).setparentName(parentName);
+								System.out.println("Updated Parent name");
+							}
+							else {
+								System.out.println("Wrong account used!");
+							}
+						
+						}
+						
 
 					} 
 					else if (staffChoice == OPTION_DELETE_PARENT) {
@@ -157,7 +209,7 @@ public class C206_CaseStudy {
 		System.out.println("5. Add CCA");
 		System.out.println("6. Delete CCA");
 		System.out.println("7. View All Parent");
-		System.out.println("8. Add Parent");
+		System.out.println("8. Update Parent");
 		System.out.println("9. Delete Parent");
 		System.out.println("10. Quit");
 
@@ -254,10 +306,11 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void addParent(ArrayList<StudentList> studentList, StudentList s) {
-		studentList.add(s);
-		System.out.println("Parent " + s + " is added.");
-	}
+//	public static void updateParent(ArrayList<StudentList> studentList, StudentList s, int index) {
+//	
+//		studentList.set(index, s);
+//		System.out.println("Parent " + s + " is updated.");
+//	}
 
 	public static void deleteParent(ArrayList<StudentList> studentList, StudentList s) {
 		if (studentList.size() != 0) {
