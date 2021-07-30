@@ -6,12 +6,19 @@ public class C206_CaseStudy {
 	static ArrayList<StudentList> studentList = new ArrayList<StudentList>();
 	static ArrayList<CCA> ccaList = new ArrayList<CCA>();
 
-	private static final int OPTION_VIEW = 1;
+	private static final int OPTION_VIEW_STUDENT = 1;
+	private static final int OPTION_ADD_STUDENT = 2;
+	private static final int OPTION_DELETE_STUDENT = 3;
+	private static final int OPTION_VIEW_CCA = 4;
+	private static final int OPTION_ADD_CCA = 5;
+	private static final int OPTION_DELETE_CCA = 6;
+	private static final int OPTION_VIEW_PARENT = 7;
+	private static final int OPTION_ADD_PARENT = 8;
+	private static final int OPTION_DELETE_PARENT = 9;
+	private static final int OPTION_QUIT= 10;
 
 	public static void main(String args[]) {
 
-		ArrayList<StudentList> studentList = new ArrayList<StudentList>();
-		ArrayList<CCA> ccaList = new ArrayList<CCA>();
 
 		ccaList.add(new CCA("Sports", "Sports include rock climbing,swimming and many more", 10, "Monday", 3.00, 5.00,
 				"Field", "Thomas"));
@@ -23,34 +30,86 @@ public class C206_CaseStudy {
 		studentList.add(new StudentList(1, "1", "Amy", "admin"));
 		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James"));
 		studentList.add(new StudentList(3, "3", "Sean", "member", 3, "Woman"));
-
-		C206_CaseStudy.AdminMenu();
-		int staffChoice = Helper.readInt("Enter choice > ");
-
-		if (staffChoice == 1) {
-			C206_CaseStudy.viewAllStudent(studentList);
+		
+		
+		int userInputID = Helper.readInt("Enter your ID: ");
+		String userInputPassword = Helper.readString("Enter your password: ");
+		int isLogin = loginCheck(userInputID, userInputPassword);
+		
+		while(isLogin == -1) {
 			
-		} else if (staffChoice == 2) {
+			Helper.line(30, "-");
+			System.out.println("Incorrect id or password");
+			Helper.line(30, "-");
+			userInputID = Helper.readInt("Enter your ID: ");
+			userInputPassword = Helper.readString("Enter your password: ");
+			isLogin = loginCheck(userInputID, userInputPassword);
 			
+		}
+		
+		
+		int staffChoice = 1;
+		
+		if(!(isLogin == -1)) {
+			if(studentList.get(isLogin).getRole().equalsIgnoreCase("admin")) {
+				
+				while(staffChoice != OPTION_QUIT) {
+					
+					AdminMenu();
+					staffChoice = Helper.readInt("Enter choice > ");
+					
+					if (staffChoice == OPTION_VIEW_STUDENT) {
+						viewAllStudent(studentList);
+						
+					} 
+					else if (staffChoice == OPTION_ADD_STUDENT) {
+						Helper.line(30, "-");
+						System.out.println("ADD STUDENT");
+						Helper.line(30, "-");
+						
+						String password = Helper.readString("Enter password: ");
+						String name = Helper.readString("Enter name: ");
+						int primary = Helper.readInt("Enter primary level: ");
+						String parentName = Helper.readString("Enter parent name: ");
+						
+						if(password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6 || parentName.isEmpty()) {
+							System.out.println("Empty inputs!");
+						}
+						else {
+							StudentList newStudent = new StudentList(studentList.size(), password, name, "member", primary, parentName);
+							addStudent(studentList, newStudent);
+						}
 
-		} else if (staffChoice == 3) {
+					} 
+					else if (staffChoice == OPTION_DELETE_STUDENT) {
 
-		} else if (staffChoice == 4) {
+					}
+					else if (staffChoice == OPTION_VIEW_CCA) {
 
-		} else if (staffChoice == 5) {
+					} 
+					else if (staffChoice == OPTION_ADD_CCA) {
 
-		} else if (staffChoice == 6) {
+					} 
+					else if (staffChoice == OPTION_DELETE_CCA) {
 
-		} else if (staffChoice == 7) {
+					} 
+					else if (staffChoice == OPTION_VIEW_PARENT) {
 
-		} else if (staffChoice == 8) {
+					} 
+					else if (staffChoice == OPTION_ADD_PARENT) {
 
-		} else if (staffChoice == 9) {
+					} 
+					else if (staffChoice == OPTION_DELETE_PARENT) {
 
-		} else if (staffChoice == 10) {
-			System.out.println("Program End");
-		} else {
-			System.out.println("Invalid choice");
+					} 
+					else if (staffChoice == OPTION_QUIT) {
+						System.out.println("Program End");
+					} 
+					else {
+						System.out.println("Invalid choice");
+					}
+				}
+			}
 		}
 
 	}
@@ -83,7 +142,7 @@ public class C206_CaseStudy {
 
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
 		studentList.add(s);
-		System.out.println("Student " + s + " is added.");
+		System.out.println("Student " + s.getName() + " is added.");
 	}
 
 	public static void viewAllStudent(ArrayList<StudentList> studentList) {
@@ -136,18 +195,17 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static boolean loginCheck(int id, String password) {
-		boolean isChecked = false;
+	public static int loginCheck(int id, String password) {
+		int indexID = -1;
 		for (int i = 0; i < studentList.size(); i++) {
 			if (!(studentList.get(i).getName().isEmpty())) {
-				if ((studentList.get(i).getID() == id)
-						&& (studentList.get(i).getPassword().equalsIgnoreCase(password))) {
-					isChecked = true;
+				if ((studentList.get(i).getID()==id) && (studentList.get(i).getPassword().equalsIgnoreCase(password))) {
+					indexID = i;
 					break;
 				}
 			}
 		}
-		return isChecked;
+		return indexID;
 	}
 
 	// Parents
