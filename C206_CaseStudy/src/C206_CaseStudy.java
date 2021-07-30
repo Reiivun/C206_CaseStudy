@@ -195,6 +195,9 @@ public class C206_CaseStudy {
 					}
 				}
 			}
+			else if(studentList.get(isLogin).getRole().equalsIgnoreCase("member")) {
+				
+			}
 		}
 
 	}
