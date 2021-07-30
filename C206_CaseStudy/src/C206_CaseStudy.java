@@ -20,11 +20,11 @@ public class C206_CaseStudy {
 	public static void main(String args[]) {
 
 
-		ccaList.add(new CCA("Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00,
+		ccaList.add(new CCA(1,"Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00,
 				"Field", "Thomas"));
-		ccaList.add(new CCA("Music", "Chance to use different instruments", 30, "Wednesday", 3.00, 6.00,
+		ccaList.add(new CCA(2,"Music", "Chance to use different instruments", 30, "Wednesday", 3.00, 6.00,
 				"Music room", "Willy"));
-		ccaList.add(new CCA("Photograph", "Experience to take photographs", 25, "Friday", 2.30, 5.00,
+		ccaList.add(new CCA(3,"Photograph", "Experience to take photographs", 25, "Friday", 2.30, 5.00,
 				"Photo room", "Annie"));
 
 		studentList.add(new StudentList(1, "1", "Amy", "admin"));
@@ -289,7 +289,7 @@ public class C206_CaseStudy {
 
 		for (int i = 0; i < ccaList.size(); i++) {
 
-			output += String.format("%-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", ccaList.get(i).getTitle(),
+			output += String.format("%-10d %-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", ccaList.get(i).getCcaId(), ccaList.get(i).getTitle(),
 					ccaList.get(i).getdescription(), ccaList.get(i).getClassSize(), ccaList.get(i).getDayOfTheWeek(),
 					ccaList.get(i).getStartTime(), ccaList.get(i).getEndTime(), ccaList.get(i).getVenue(),
 					ccaList.get(i).getInstructorName());
@@ -299,7 +299,7 @@ public class C206_CaseStudy {
 
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
 		String output = "===CCA DETAILS===";
-		output += String.format("\n%-10s %-35s %-10s %-10s %-10s %-10s %-15s %-10s\n", "NAME", "DESCRIPTION",
+		output += String.format("\n%-10s %-10s %-35s %-10s %-10s %-10s %-10s %-15s %-10s\n","ID", "NAME", "DESCRIPTION",
 				"CLASS SIZE", "CCA DAY", "START TIME", "END TIME", "VENUE", "INSTRUCTOR");
 		output += retrieveAllCCA(ccaList);
 		System.out.println(output);
