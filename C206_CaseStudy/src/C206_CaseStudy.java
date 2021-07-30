@@ -82,19 +82,7 @@ public class C206_CaseStudy {
 
 					} 
 					else if (staffChoice == OPTION_DELETE_STUDENT) {
-						Helper.line(30, "-");
-						System.out.println("DELETE STUDENT");
-						Helper.line(30, "-");
-						
-						int studentId = Helper.readInt("Enter a student ID: ");
-						
-						if(studentId<1) {
-							System.out.println("Empty inputs");
-						}
-						else {
-							studentList.remove(studentId);
-							System.out.println("Student is deleted successfully");
-						}
+						C206_CaseStudy.deleteStudent(studentList);
 
 					}
 					else if (staffChoice == OPTION_VIEW_CCA) {
@@ -131,19 +119,7 @@ public class C206_CaseStudy {
 					
 					} 
 					else if (staffChoice == OPTION_DELETE_CCA) {
-						Helper.line(30, "-");
-						System.out.println("DELETE CCA");
-						Helper.line(30, "-");
-						
-						int ccaId = Helper.readInt("Enter CCA ID: ");
-						
-						if(ccaId<1) {
-							System.out.println("Empty inputs");
-						}
-						else {
-							ccaList.remove(ccaId);
-							System.out.println("CCA is deleted successfully");
-						}
+						C206_CaseStudy.deleteCCA(ccaList);
 						
 					} 
 					else if (staffChoice == OPTION_VIEW_PARENT) {
@@ -152,7 +128,6 @@ public class C206_CaseStudy {
 						Helper.line(30, "-");
 						
 						viewAllParent(studentList);
-
 					} 
 					else if (staffChoice == OPTION_UPDATE_PARENT) {
 						
@@ -273,20 +248,19 @@ public class C206_CaseStudy {
 		return output;
 	}
 
-	public static void deleteStudent(ArrayList<StudentList> studentList, StudentList s) {
-		if (studentList.size() != 0) {
-			for (int i = 0; i < studentList.size(); i++) {
-				if (studentList.get(i) == s) {
-					if (studentList.get(i).getRole() == "member") {
-						s.setparentName("");
-						System.out.println("Student " + s + " is deleted.");
-					}
-				} else {
-					System.out.println("Input does not match any of the students in the list.");
-				}
-			}
-		} else {
-			System.out.println("No students in list to delete.");
+	public static void deleteStudent(ArrayList<StudentList> studentList) {
+		Helper.line(30, "-");
+		System.out.println("DELETE STUDENT");
+		Helper.line(30, "-");
+		
+		int studentID = Helper.readInt("Enter Student ID: ");
+		
+		if(studentID<1) {
+			System.out.println("Empty inputs");
+		}
+		else {
+			studentList.remove(studentID);
+			System.out.println("Student is deleted successfully");
 		}
 
 	}
@@ -387,9 +361,20 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void deleteCCA(ArrayList<CCA> ccaList, CCA cc) {
-		ccaList.remove(cc);
-		System.out.println("The CCA " + cc + " is successfully deleted.");
+	public static void deleteCCA(ArrayList<CCA> ccaList) {
+		Helper.line(30, "-");
+		System.out.println("DELETE CCA");
+		Helper.line(30, "-");
+		
+		int ccaId = Helper.readInt("Enter CCA ID: ");
+		
+		if(ccaId<1) {
+			System.out.println("Empty inputs");
+		}
+		else {
+			ccaList.remove(ccaId-1);
+			System.out.println("CCA is deleted successfully");
+		}
 	}
 
 	public static ArrayList<String> addStudentCCA(String name, String cca) {

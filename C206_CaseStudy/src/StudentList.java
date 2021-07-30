@@ -66,9 +66,8 @@ public class StudentList {
 		return parentname;
 	}
 
-	public StudentList setparentName(String parentname) {
+	public void setparentName(String parentname) {
 		this.parentname = parentname;
-		return null;
 	}
 	
 	public String getRole() {
