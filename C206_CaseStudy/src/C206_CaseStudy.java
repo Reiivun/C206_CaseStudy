@@ -182,9 +182,7 @@ public class C206_CaseStudy {
 						}
 						else {
 							System.out.println("Wrong account used!");
-						}
-						
-						
+						}			
 						
 					} 
 					else if (staffChoice == OPTION_QUIT) {
@@ -196,7 +194,42 @@ public class C206_CaseStudy {
 				}
 			}
 			else if(studentList.get(isLogin).getRole().equalsIgnoreCase("member")) {
-				
+				while(staffChoice != OPTION_QUIT) {
+					StudentMenu();
+					staffChoice = Helper.readInt("Enter choice > ");
+					
+					int index = isLogin;
+					
+					
+					if(staffChoice == OPTION_VIEW_STUDENT) {
+						Helper.line(30, "-");
+						System.out.println("VIEW STUDENT");
+						Helper.line(30, "-");
+						
+						viewStudent(studentList, index);
+						
+					}
+					else if(staffChoice == 2) {
+						Helper.line(30, "-");
+						System.out.println("VIEW CCA");
+						Helper.line(30, "-");
+						
+						viewAllCCA(ccaList);
+					}
+					else if(staffChoice == 3) {
+						Helper.line(30, "-");
+						System.out.println("VIEW PARENT");
+						Helper.line(30, "-");
+						
+						retrieveParent(studentList, index);
+					}
+					else if (staffChoice == OPTION_QUIT) {
+						System.out.println("Program End");
+					} 
+					else {
+						System.out.println("Invalid choice");
+					}
+				}
 			}
 		}
 
@@ -208,6 +241,18 @@ public class C206_CaseStudy {
 		Helper.line(30, "-");
 		System.out.println("LOGIN");
 		Helper.line(30, "-");
+	}
+	
+	public static void StudentMenu() {
+		Helper.line(30, "-");
+		System.out.println("STUDENT MENU");
+		Helper.line(30, "-");
+
+		System.out.println("1. View Student");
+		System.out.println("2. View All CCA");
+		System.out.println("3. View Parent");
+		System.out.println("10. Quit");
+
 	}
 
 	public static void AdminMenu() {
@@ -417,4 +462,28 @@ public class C206_CaseStudy {
 		return studentCCAlist;
 
 	}
+	
+	
+	//STUDENT FUNCTIONS ============================================================
+	
+	public static void retrieveParent(ArrayList<StudentList> studentList, int index) {
+
+		String output = String.format("%-15s %-15s\n", "STUDENT NAME", "PARENTS NAME");
+		output += String.format("%-15s %-15s\n", studentList.get(index).getName(),
+				studentList.get(index).getparentName());
+		
+		Helper.line(30, "-");
+		System.out.println(output);
+		Helper.line(30, "-");
+		
+	}
+	
+	public static void viewStudent(ArrayList<StudentList> studentList, int index) {
+		  String output = String.format("%-10s %-20s %-10s %-10s\n", "NAME", "ROLE","PRIMARY","PARENT NAME");
+		  output += String.format("%-10s %-20s %-10s %-10s\n", studentList.get(index).getName(),studentList.get(index).getRole(),
+			       studentList.get(index).getPrimary(),studentList.get(index).getparentName());
+		  System.out.println(output);
+		 }
+	
+	
 }
