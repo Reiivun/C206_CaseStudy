@@ -309,13 +309,18 @@ public class C206_CaseStudy {
 		
 		int studentID = Helper.readInt("Enter Student ID: ");
 		
-		if(studentID<1) {
-			System.out.println("Empty inputs");
+		if (studentList.size() != 0) {
+			if(studentID<1) {
+				System.out.println("Empty inputs");
+			}
+			else {
+				studentList.remove(studentID);
+				System.out.println("Student is deleted successfully");
+			}
+		} else {
+			System.out.println("No student to delete.");
 		}
-		else {
-			studentList.remove(studentID);
-			System.out.println("Student is deleted successfully");
-		}
+		
 
 	}
 
