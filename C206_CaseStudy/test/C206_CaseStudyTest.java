@@ -63,10 +63,10 @@ public class C206_CaseStudyTest {
 	@Test
 	public void deleteStudentTest() {
 		// When size list is 2, when deleting a student, the size becomes 1 - normal
-		C206_CaseStudy.deleteStudent(studentList, sl1);
+		C206_CaseStudy.deleteStudent(studentList);
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
 		// Delete another item, when list size = 0 and is deleted, the size = 0 - normal
-		C206_CaseStudy.deleteStudent(studentList, sl2);
+		C206_CaseStudy.deleteStudent(studentList);
 		assertEquals("Check that Student arraylist size is 0", 0, studentList.size());
 		// Student list is not null, so that we can delete a student - boundary
 		assertNotNull("Check if there is valid student arraylist to delete from", studentList);
