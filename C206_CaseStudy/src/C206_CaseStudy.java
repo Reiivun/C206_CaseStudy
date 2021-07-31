@@ -27,9 +27,11 @@ public class C206_CaseStudy {
 		ccaList.add(new CCA(3,"Photograph", "Experience to take photographs", 25, "Friday", 2.30, 5.00,
 				"Photo room", "Annie"));
 
+		ArrayList<Integer> studentCCA1 = new ArrayList<Integer>();
+		ArrayList<Integer> studentCCA2 = new ArrayList<Integer>();
 		studentList.add(new StudentList(1, "1", "Amy", "admin"));
-		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James"));
-		studentList.add(new StudentList(3, "3", "Sean", "member", 3, "Woman"));
+		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1));
+		studentList.add(new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2));
 		
 		
 		int userInputID = Helper.readInt("Enter your ID: ");
@@ -223,6 +225,29 @@ public class C206_CaseStudy {
 						
 						retrieveParent(studentList, index);
 					}
+					else if(staffChoice == 4) {
+						Helper.line(30, "-");
+						System.out.println("ADD CCA");
+						Helper.line(30, "-");
+						
+						int CCAid = Helper.readInt("Enter ID of CCA to join: ");
+						addStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
+					}
+					else if(staffChoice == 5) {
+						Helper.line(30, "-");
+						System.out.println("DROP CCA");
+						Helper.line(30, "-");
+						int CCAid = Helper.readInt("Enter ID of CCA to drop: ");
+						dropStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
+					}
+					else if(staffChoice == 6) {
+						Helper.line(30, "-");
+						System.out.println("VIEW JOINED CCA");
+						Helper.line(30, "-");
+						
+						viewStudentCCA(studentList.get(isLogin).getRegisteredCCA(), ccaList);
+					}
+					
 					else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
 					} 
@@ -251,6 +276,9 @@ public class C206_CaseStudy {
 		System.out.println("1. View Student");
 		System.out.println("2. View All CCA");
 		System.out.println("3. View Parent");
+		System.out.println("4. Add CCA");
+		System.out.println("5. Drop CCA");
+		System.out.println("6. View Joined CCA");
 		System.out.println("10. Quit");
 
 	}
@@ -436,36 +464,65 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static ArrayList<String> addStudentCCA(String name, String cca) {
-		// assuming already logged in
-		// creating available CCA array for student
-		ArrayList<String> studentCCAlist = new ArrayList<String>();
-		studentCCAlist.set(0, name);
-		if (ccaList.size() != 0) {
-			for (int i = 0; i < ccaList.size(); i++) {
-				if (ccaList.get(i).getTitle().equalsIgnoreCase(name)) {
-					studentCCAlist.add(ccaList.get(i).getTitle());
+	public static void addStudentCCA(ArrayList<Integer> ccalist, int id) {
+		boolean check = false;
+		if(ccalist.size()!=0) {
+			for(int i=0; i<ccalist.size();i++) {
+				if(ccalist.get(i)==id) {
+					check = true;
 					break;
 				}
+				
 			}
+			if(check==true) {
+				System.out.println("CCA already registered");
+			}else {
+				ccalist.add(id);
+				System.out.println("CCA registered successfully");
+			}
+		} else {
+			ccalist.add(id);
+			System.out.println("CCA registered successfully");
 		}
-
-		return studentCCAlist;
 	}
+		
 
-	public static ArrayList<String> dropStudentCCA(ArrayList<String> studentCCAlist, String cca) {
-		// assuming already logged in
-		if (studentCCAlist.size() != 0) {
-			// index 0 is student name
-			for (int i = 1; i < studentCCAlist.size(); i++) {
-				if (studentCCAlist.get(i).equalsIgnoreCase(cca)) {
-					studentCCAlist.remove(i);
+	public static void dropStudentCCA(ArrayList<Integer> ccalist, int id) {
+		boolean check = false;
+		int deleteid = 0;
+		if(ccalist.size()!=0) {
+			for(int i=0; i<ccalist.size();i++) {
+				if(ccalist.get(i)==id) {
+					check = true;
+					deleteid = i;
 					break;
+				}
+				
+			}
+			if(check==false) {
+				System.out.println("CCA not registered");
+			}else {
+				ccalist.remove(deleteid);
+				System.out.println("CCA dropped successfully");
+			}
+		}else {
+			System.out.println("No CCA registered");
+		}
+	}
+	
+	public static void viewStudentCCA(ArrayList<Integer> ccalist, ArrayList<CCA> ccalist2) {
+		String output = "===REGISTERED CCA===";
+		if(ccalist.size()!=0) {
+			for(int i=0; i<ccalist.size();i++) {
+				for(int j=0; j<ccalist2.size();j++) {
+					if(ccalist2.get(j).getCcaId()==ccalist.get(i)) {
+						output+=String.format("\n   ID:%-2d %s", ccalist2.get(j).getCcaId(), ccalist2.get(j).getTitle());
+					}
 				}
 			}
 		}
-		return studentCCAlist;
-
+		
+		System.out.println(output);
 	}
 	
 	

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
  * I declare that this code was written by me. 
  * I will not copy or allow others to copy my code. 
@@ -16,7 +18,7 @@ public class StudentList {
 	private String role;
 	private int primary;
 	private String parentname;
-	
+	private ArrayList<Integer> registeredCCA;
 	
 	public StudentList(int id, String password, String name, String role) {
 		this.id = id;
@@ -32,6 +34,16 @@ public class StudentList {
 		this.role = role;
 		this.primary = primary;
 		this.parentname = parentname;
+	}
+	
+	public StudentList(int id, String password, String name, String role, int primary, String parentname, ArrayList<Integer> registeredCCA) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.role = role;
+		this.primary = primary;
+		this.parentname = parentname;
+		this.registeredCCA = registeredCCA;
 	}
 	
 	public int getID() {
@@ -72,6 +84,13 @@ public class StudentList {
 	
 	public String getRole() {
 		return role;
+	}
+	public ArrayList<Integer> getRegisteredCCA() {
+		return registeredCCA;
+	}
+
+	public void setRegisteredCCA(ArrayList<Integer> registeredCCA) {
+		this.registeredCCA = registeredCCA;
 	}
 	
 }
