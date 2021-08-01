@@ -15,7 +15,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_VIEW_PARENT = 7;
 	private static final int OPTION_UPDATE_PARENT = 8;
 	private static final int OPTION_DELETE_PARENT = 9;
-	private static final int OPTION_QUIT= 10;
+	private static final int OPTION_QUIT= 20;
 
 	public static void main(String args[]) {
 
@@ -187,6 +187,55 @@ public class C206_CaseStudy {
 						}			
 						
 					} 
+					else if(staffChoice == 10) {
+						Helper.line(30, "-");
+						System.out.println("ADD CCA FOR STUDENT");
+						Helper.line(30, "-");
+						String studentName = Helper.readString("Enter student's name: ");
+						int CCAid = Helper.readInt("Enter ID of CCA to join: ");
+						if(getStudent(studentList, studentName)==-1) {
+							System.out.println("Invalid name");
+						}else {
+							if(checkccaID(ccaList, CCAid)) {
+								addStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(), CCAid);
+							}else {
+								System.out.println("Invalid ID");
+							}
+							
+						}
+				
+					}
+					else if(staffChoice == 11) {
+						Helper.line(30, "-");
+						System.out.println("DROP CCA FOR STUDENT");
+						Helper.line(30, "-");
+						String studentName = Helper.readString("Enter student's name: ");
+						int CCAid = Helper.readInt("Enter ID of CCA to drop: ");
+						if(getStudent(studentList, studentName)==-1) {
+							System.out.println("Invalid name");
+						}else {
+							if(checkccaID(ccaList, CCAid)) {
+								dropStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(), CCAid);
+							}else {
+								System.out.println("Invalid ID");
+							}
+							
+						}
+						
+					}
+					else if(staffChoice == 12) {
+						Helper.line(30, "-");
+						System.out.println("VIEW STUDENT'S JOINED CCA");
+						Helper.line(30, "-");
+						String studentName = Helper.readString("Enter student's name: ");
+						if(getStudent(studentList, studentName)==-1) {
+							System.out.println("Invalid name");
+						}else {
+							viewStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(), ccaList);
+						}
+						
+					}
+					
 					else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
 					} 
@@ -231,15 +280,24 @@ public class C206_CaseStudy {
 						Helper.line(30, "-");
 						
 						int CCAid = Helper.readInt("Enter ID of CCA to join: ");
-						addStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
+						if(checkccaID(ccaList, CCAid)) {
+							addStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
+						}else {
+							System.out.println("Invalid ID");
+						}
+						
 					}
 					else if(staffChoice == 5) {
 						Helper.line(30, "-");
 						System.out.println("DROP CCA");
 						Helper.line(30, "-");
 						int CCAid = Helper.readInt("Enter ID of CCA to drop: ");
-						dropStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
-					}
+						if(checkccaID(ccaList, CCAid)) {
+							dropStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
+						}else {
+							System.out.println("Invalid ID");
+						}
+											}
 					else if(staffChoice == 6) {
 						Helper.line(30, "-");
 						System.out.println("VIEW JOINED CCA");
@@ -279,7 +337,7 @@ public class C206_CaseStudy {
 		System.out.println("4. Add CCA");
 		System.out.println("5. Drop CCA");
 		System.out.println("6. View Joined CCA");
-		System.out.println("10. Quit");
+		System.out.println("20. Quit");
 
 	}
 
@@ -297,7 +355,10 @@ public class C206_CaseStudy {
 		System.out.println("7. View All Parent");
 		System.out.println("8. Update Parent");
 		System.out.println("9. Delete Parent");
-		System.out.println("10. Quit");
+		System.out.println("10. Add CCA for Student");
+		System.out.println("11. Drop CCA for Student");
+		System.out.println("12. View Student's CCA");
+		System.out.println("20. Quit");
 
 	}
 
@@ -525,6 +586,31 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	
+	public static int getStudent(ArrayList<StudentList> studentlist, String name) {
+		int index = -1;
+		if(studentlist.size()!=0) {
+			for(int i=0; i<studentlist.size(); i++) {
+				if(studentlist.get(i).getName().equalsIgnoreCase(name)) {
+					index = i;
+					break;
+				}
+			}
+		}
+		return index;
+	}
+	
+	public static boolean checkccaID(ArrayList<CCA> ccalist, int id) {
+		boolean result = false;
+		if(ccalist.size()!=0) {
+			for(int i=0; i<ccalist.size(); i++) {
+				if(ccalist.get(i).getCcaId()==id) {
+					result =  true;
+					break;
+				}
+			}
+		}
+		return result;
+	}
 	
 	//STUDENT FUNCTIONS ============================================================
 	

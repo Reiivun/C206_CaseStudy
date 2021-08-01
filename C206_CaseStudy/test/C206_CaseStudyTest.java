@@ -24,9 +24,11 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp() throws Exception {
+		ArrayList<Integer> studentCCA1 = new ArrayList<Integer>();
+		ArrayList<Integer> studentCCA2 = new ArrayList<Integer>();
 		sl1 = new StudentList(1, "1", "Amy", "admin"); 
-		sl2 = new StudentList(2, "2", "Tom", "member", 1, "James");
-		sl3 = new StudentList(3, "3", "Sean", "member", 3, "Woman");
+		sl2 = new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1);
+		sl3 = new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2);
 		
 		cc1 = new CCA(1,"Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00,
 				"Field", "Thomas");
@@ -139,6 +141,25 @@ public class C206_CaseStudyTest {
 				"Music room", "Willy");
 		
 		assertEquals("Test that viewAllCCA", testOutput, allCCA);
+		
+	}
+	
+	//Add/Drop CCA for Student
+	@Test
+	public void adddropStudentCCA() {
+		//Test that only existing CCAs can be added
+		assertFalse("Test that no such ID exists in CCA array", C206_CaseStudy.checkccaID(ccaList, 1));
+		
+		//Test that the CCA will be successfully added to the student's database
+		studentList.add(sl1);
+		ArrayList<Integer> templist = studentList.get(0).getRegisteredCCA();
+		C206_CaseStudy.addStudentCCA(templist, 1);
+		assertEquals("Test that id 1 is added into cca array for student", 1, studentList.get(0).getRegisteredCCA().size());
+		
+		//Test that the CCA will be successfully removed from the student's database
+		C206_CaseStudy.dropStudentCCA(templist, 1);
+		assertEquals("Test that id 1 is removed from cca array for student", 0, studentList.get(0).getRegisteredCCA().size());
+		
 		
 	}
 	
