@@ -139,9 +139,14 @@ public class C206_CaseStudyTest {
 		allCCA= C206_CaseStudy.retrieveAllCCA(ccaList);
 		testOutput = String.format("%-10d %-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", 1, "Sports", "Rock climbing,swimming etc", 10, "Monday",3.00, 5.00,
 				"Field", "Thomas");
+
+		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s %-20.2f %-20.2f %-10s %-10s  \n","2", "Music", "Yes", "", "Wednesday",3.00, 6.00,
+				"Music Room", "Willy");
+	
 		testOutput += String.format("%-10d %-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", 2, "Music", "Chance to use different instruments", 30, "Wednesday",3.00, 6.00,
 				"Music room", "Willy");
 		
+
 		assertEquals("Test that viewAllCCA", testOutput, allCCA);
 		
 	}
@@ -153,15 +158,20 @@ public class C206_CaseStudyTest {
 		assertFalse("Test that no such ID exists in CCA array", C206_CaseStudy.checkccaID(ccaList, 1));
 		
 		//Test that the CCA will be successfully added to the student's database
-		studentList.add(sl1);
+		studentList.add(sl2);
 		ArrayList<Integer> templist = studentList.get(0).getRegisteredCCA();
 		C206_CaseStudy.addStudentCCA(templist, 1);
 		assertEquals("Test that id 1 is added into cca array for student", 1, studentList.get(0).getRegisteredCCA().size());
+		
+		//Test that only 1 added at a time
+		assertEquals(templist.size(), 1);
 		
 		//Test that the CCA will be successfully removed from the student's database
 		C206_CaseStudy.dropStudentCCA(templist, 1);
 		assertEquals("Test that id 1 is removed from cca array for student", 0, studentList.get(0).getRegisteredCCA().size());
 		
+		//Test that only 1 dropped at a time
+		assertTrue(templist.isEmpty());
 		
 	}
 	
