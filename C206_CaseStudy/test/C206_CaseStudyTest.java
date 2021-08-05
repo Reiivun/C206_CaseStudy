@@ -139,15 +139,14 @@ public class C206_CaseStudyTest {
 		allCCA= C206_CaseStudy.retrieveAllCCA(ccaList);
 		testOutput = String.format("%-10d %-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", 1, "Sports", "Rock climbing,swimming etc", 10, "Monday",3.00, 5.00,
 				"Field", "Thomas");
-<<<<<<< HEAD
+
 		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s %-20.2f %-20.2f %-10s %-10s  \n","2", "Music", "Yes", "", "Wednesday",3.00, 6.00,
 				"Music Room", "Willy");
 	
-=======
 		testOutput += String.format("%-10d %-10s %-35s %-10d %-10s %-10.2f %-10.2f %-15s %-10s\n", 2, "Music", "Chance to use different instruments", 30, "Wednesday",3.00, 6.00,
 				"Music room", "Willy");
 		
->>>>>>> branch 'master' of https://github.com/Reiivun/C206_CaseStudy.git
+
 		assertEquals("Test that viewAllCCA", testOutput, allCCA);
 		
 	}

@@ -34,6 +34,17 @@ public class C206_CaseStudy {
 		
 		categoryList.add(new Category(1, "Sports", "Basic physical training", ccaList));
 		categoryList.add(new Category(2, "Uniform group", "UG", ccaList));
+		
+		coverMenu();
+		int optionCover = Helper.readInt("Enter option: ");
+		if(optionCover==2) {
+			int studentID  = Helper.readInt("Enter student ID to register for CCA: ");
+			System.out.println("Registration sent to email of student ID\n");
+		}
+		
+		
+		
+		loginMenu();
 
 		int userInputID = Helper.readInt("Enter your ID: ");
 		String userInputPassword = Helper.readString("Enter your password: ");
@@ -361,6 +372,15 @@ public class C206_CaseStudy {
 		System.out.println("15. Delete category");
 		System.out.println("20. Quit");
 
+	}
+	
+	public static void coverMenu() {
+		Helper.line(30, "-");
+		System.out.println("CCA REGISTRATION MENU");
+		Helper.line(30, "-");
+
+		System.out.println("1. Login");
+		System.out.println("2. Register");
 	}
 
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
