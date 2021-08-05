@@ -175,7 +175,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addStudent(studentList, sl1);
 		
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
-		assertTrue(studentList.get(1).getparentName().isEmpty());
+		assertFalse(studentList.get(1).getparentName().isEmpty());
 		assertSame("Check that parent is added", sl1, studentList.get(0));
 		
 		//Add another item. test The size of the list is 2? -normal
@@ -186,7 +186,7 @@ public class C206_CaseStudyTest {
 		assertSame("Check that parent is added", sl2, studentList.get(1));
 	}
 	
-	//Retrieve all student
+	//Retrieve all Parent
 		@Test
 		public void retrieveAllParentTest() {
 			// Test if parent list is not null but empty -boundary
@@ -211,7 +211,7 @@ public class C206_CaseStudyTest {
 			
 		}
 		
-		// Delete Student Test
+	//Delete Parent Test
 		@Test
 		public void deleteParentTest() {
 			// When size list is 2, when deleting a Parent, the size becomes 1 - normal
