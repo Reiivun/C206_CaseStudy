@@ -695,7 +695,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 
 	}
-
+	
 	public static void editCategoryDetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
 		if (String.valueOf(categoryId).isEmpty()) {
 			System.out.println("Empty inputs");
@@ -715,6 +715,7 @@ public class C206_CaseStudy {
 
 			}
 		}
+	
 	
 
 	public static void addCategories(Category category) {
