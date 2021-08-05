@@ -270,7 +270,7 @@ public class C206_CaseStudy {
 						int categoryId = Helper.readInt("Enter id of category: ");
 						String categoryDetails = Helper.readString("Edit Category details: ");
 
-						C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
+						C206_CaseStudy.editCCADetails(categoryList, categoryDetails, categoryId);
 					}
 
 					else if (staffChoice == 16) {
@@ -696,7 +696,7 @@ public class C206_CaseStudy {
 
 	}
 	
-	public static void editCategoryDetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
+	public static void editCCADetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
 		if (String.valueOf(categoryId).isEmpty()) {
 			System.out.println("Empty inputs");
 		}
