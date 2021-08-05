@@ -10,6 +10,7 @@ public class C206_CaseStudyTest {
 	private StudentList sl1;
 	private StudentList sl2;
 	private StudentList sl3;
+	private StudentList sl4;
 	private CCA cc1;
 	private CCA cc2;
 	private CCA cc3;
@@ -29,6 +30,7 @@ public class C206_CaseStudyTest {
 		sl1 = new StudentList(1, "1", "Amy", "admin"); 
 		sl2 = new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1);
 		sl3 = new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2);
+		sl4 = new StudentList(2, "2", "Tom", "member", 1, "", studentCCA1);
 		
 		cc1 = new CCA(1,"Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00,
 				"Field", "Thomas");
@@ -162,6 +164,66 @@ public class C206_CaseStudyTest {
 		
 		
 	}
+	
+	//Add Parents
+	@Test
+	public void addParentTest() {
+		// Student list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid parent arraylist to add to", studentList);
+		//Given an empty list, after adding 1 parent, the size of the list is 1 - normal
+		//The item just added is as same as the first student of the list
+		C206_CaseStudy.addStudent(studentList, sl1);
+		
+		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
+		assertTrue(studentList.get(1).getparentName().isEmpty());
+		assertSame("Check that parent is added", sl1, studentList.get(0));
+		
+		//Add another item. test The size of the list is 2? -normal
+		//The item just added is as same as the second item of the list
+		C206_CaseStudy.addStudent(studentList, sl2);
+		assertEquals("Check that Student arraylist size is 2", 2, studentList.size());
+		assertFalse(studentList.get(2).getparentName().isEmpty());
+		assertSame("Check that parent is added", sl2, studentList.get(1));
+	}
+	
+	//Retrieve all student
+		@Test
+		public void retrieveAllParentTest() {
+			// Test if parent list is not null but empty -boundary
+			assertNotNull("Test if there is valid parent arraylist to retrieve students", studentList);
+			
+			//test if the list of student retrieved from the SourceCentre is empty - boundary
+			String allParent= C206_CaseStudy.retrieveAllStudent(studentList);
+			String testOutput = "";
+			assertEquals("Check that viewAllParent", testOutput, allParent);
+			
+			//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+			C206_CaseStudy.addStudent(studentList, sl2);
+			C206_CaseStudy.addStudent(studentList, sl3);
+			assertEquals("Test that Student arraylist size is 2", 2, studentList.size());
+			
+			//test if the expected output string same as the list of student retrieved from the SourceCentre	
+			allParent= C206_CaseStudy.retrieveAllParent(studentList);
+			testOutput = String.format("%-15s %-15s\n", "Tom", "James");
+			testOutput += String.format("%-15s %-15s\n", "Sean", "Woman");
+		
+			assertEquals("Test that viewAllParent", testOutput, allParent);
+			
+		}
+		
+		// Delete Student Test
+		@Test
+		public void deleteParentTest() {
+			// When size list is 2, when deleting a Parent, the size becomes 1 - normal
+			C206_CaseStudy.deleteParent(studentList, sl2);
+			assertEquals("Check that Parent arraylist size is 1", 0, studentList.size());
+			// Delete another item, when list size = 0 and is deleted, the size = 0 - normal
+			C206_CaseStudy.deleteParent(studentList, sl3);
+			assertEquals("Check that Parent arraylist size is 0", 0, studentList.size());
+			// Student list is not null, so that we can delete a Parent - boundary
+			assertNotNull("Check if there is valid Parent arraylist to delete from", studentList);
+		}
+	
 	
 	
 	@After
