@@ -706,7 +706,8 @@ public class C206_CaseStudy {
 					Category c = categoryList.get(i);
 
 					if (c.getId() == categoryId) {
-						categoryList.set(Category.getId(), categoryDetails);
+						categoryList.get(i).setDetails(categoryDetails);
+//						categoryList.set(categoryList.get(i).getId(), categoryDetails);
 						System.out.println("Successfully added");
 					}
 				}
