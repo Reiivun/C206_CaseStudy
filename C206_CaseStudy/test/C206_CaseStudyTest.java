@@ -158,10 +158,15 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addStudentCCA(templist, 1);
 		assertEquals("Test that id 1 is added into cca array for student", 1, studentList.get(0).getRegisteredCCA().size());
 		
+		//Test that only 1 added at a time
+		assertEquals(templist.size(), 1);
+		
 		//Test that the CCA will be successfully removed from the student's database
 		C206_CaseStudy.dropStudentCCA(templist, 1);
 		assertEquals("Test that id 1 is removed from cca array for student", 0, studentList.get(0).getRegisteredCCA().size());
 		
+		//Test that only 1 dropped at a time
+		assertTrue(templist.isEmpty());
 		
 	}
 	
