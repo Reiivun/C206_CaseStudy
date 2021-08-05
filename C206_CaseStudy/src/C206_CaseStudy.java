@@ -483,7 +483,7 @@ public class C206_CaseStudy {
 
 	// CCA DETAILS
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cc) {
-
+		 	
 		ccaList.add(cc);
 		System.out.println("CCA have been added");
 	}

@@ -165,7 +165,7 @@ public class C206_CaseStudyTest {
 		
 	}
 	
-	/*
+	
 	//Add Parents
 	@Test
 	public void addParentTest() {
@@ -185,7 +185,7 @@ public class C206_CaseStudyTest {
 		assertFalse(studentList.get(2).getparentName().isEmpty());
 		assertSame("Check that parent is added", sl3, studentList.get(1));
 	}
-	*/
+	
 	
 	//Retrieve all Parent
 		@Test
@@ -215,12 +215,17 @@ public class C206_CaseStudyTest {
 	//Delete Parent Test
 		@Test
 		public void deleteParentTest() {
+			C206_CaseStudy.addStudent(studentList, sl2);
+			C206_CaseStudy.addStudent(studentList, sl3);
+			
 			// When size list is 2, when deleting a Parent, the size becomes 1 - normal
 			C206_CaseStudy.deleteParent(studentList, sl2);
 			assertEquals("Check that Parent arraylist size is 1", 1, studentList.size());
+			
 			// Delete another item, when list size = 0 and is deleted, the size = 0 - normal
 			C206_CaseStudy.deleteParent(studentList, sl3);
 			assertEquals("Check that Parent arraylist size is 0", 0, studentList.size());
+			
 			// Student list is not null, so that we can delete a Parent - boundary
 			assertNotNull("Check if there is valid Parent arraylist to delete from", studentList);
 		}
