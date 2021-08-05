@@ -699,6 +699,7 @@ public class C206_CaseStudy {
 	public static void editCategoryDetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
 		if (String.valueOf(categoryId).isEmpty()) {
 			System.out.println("Empty inputs");
+		}
 			if (categoryList.size() == 0) {
 				System.out.println("No Category to edit.");
 			} else {
@@ -714,7 +715,7 @@ public class C206_CaseStudy {
 
 			}
 		}
-	}
+	
 
 	public static void addCategories(Category category) {
 		if (category.getName().isEmpty() || category.getDetails().isEmpty()) {
