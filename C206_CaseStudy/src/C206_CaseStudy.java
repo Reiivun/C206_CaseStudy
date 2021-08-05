@@ -67,17 +67,17 @@ public class C206_CaseStudy {
 		
 		loginMenu();
 
-		int userInputID = Helper.readInt("Enter your ID: ");
-		String userInputPassword = Helper.readString("Enter your password: ");
+		int userInputID = Helper.readInt("Enter your student ID: ");
+		String userInputPassword = Helper.readString("Enter your registration ID: ");
 		int isLogin = loginCheck(userInputID, userInputPassword);
 
 		while (isLogin == -1) {
 
 			Helper.line(30, "-");
-			System.out.println("Incorrect id or password");
+			System.out.println("Incorrect student or registration ID");
 			Helper.line(30, "-");
-			userInputID = Helper.readInt("Enter your ID: ");
-			userInputPassword = Helper.readString("Enter your password: ");
+			userInputID = Helper.readInt("Enter your student ID: ");
+			userInputPassword = Helper.readString("Enter your registration ID: ");
 			isLogin = loginCheck(userInputID, userInputPassword);
 
 		}
