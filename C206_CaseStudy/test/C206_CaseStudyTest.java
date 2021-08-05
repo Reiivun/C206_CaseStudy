@@ -153,7 +153,7 @@ public class C206_CaseStudyTest {
 		assertFalse("Test that no such ID exists in CCA array", C206_CaseStudy.checkccaID(ccaList, 1));
 		
 		//Test that the CCA will be successfully added to the student's database
-		studentList.add(sl1);
+		studentList.add(sl2);
 		ArrayList<Integer> templist = studentList.get(0).getRegisteredCCA();
 		C206_CaseStudy.addStudentCCA(templist, 1);
 		assertEquals("Test that id 1 is added into cca array for student", 1, studentList.get(0).getRegisteredCCA().size());
