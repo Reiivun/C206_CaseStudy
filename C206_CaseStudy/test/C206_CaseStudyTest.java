@@ -153,7 +153,7 @@ public class C206_CaseStudyTest {
 		assertFalse("Test that no such ID exists in CCA array", C206_CaseStudy.checkccaID(ccaList, 1));
 		
 		//Test that the CCA will be successfully added to the student's database
-		studentList.add(sl1);
+		studentList.add(sl2);
 		ArrayList<Integer> templist = studentList.get(0).getRegisteredCCA();
 		C206_CaseStudy.addStudentCCA(templist, 1);
 		assertEquals("Test that id 1 is added into cca array for student", 1, studentList.get(0).getRegisteredCCA().size());
@@ -172,10 +172,10 @@ public class C206_CaseStudyTest {
 		assertNotNull("Check if there is valid parent arraylist to add to", studentList);
 		//Given an empty list, after adding 1 parent, the size of the list is 1 - normal
 		//The item just added is as same as the first student of the list
-		C206_CaseStudy.addStudent(studentList, sl1);
+		C206_CaseStudy.addStudent(studentList, sl2);
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
 		assertFalse(studentList.get(1).getparentName().isEmpty());
-		assertSame("Check that parent is added", sl1, studentList.get(0));
+		assertSame("Check that parent is added", sl2, studentList.get(0));
 		
 		//Add another item. test The size of the list is 2? -normal
 		//The item just added is as same as the second item of the list
