@@ -122,7 +122,7 @@ public class C206_CaseStudyTest {
 		allCCA= C206_CaseStudy.retrieveAllCCA(ccaList);
 		testOutput = String.format("%-10s %-30s %-10s %-10s %-20s %-20.2f %-20.2f %-10s %-10s  \n","1", "Sports", "Yes", "", "Monday",3.00, 5.00,
 				"Field", "Thomas");
-		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s %-20.2f %-20.2f %-10s %-10s  \n","1", "Music", "Yes", "", "Wednesday",3.00, 6.00,
+		testOutput += String.format("%-10s %-30s %-10s %-10s %-20s %-20.2f %-20.2f %-10s %-10s  \n","2", "Music", "Yes", "", "Wednesday",3.00, 6.00,
 				"Music Room", "Willy");
 	
 		assertEquals("Test that viewAllCCA", testOutput, allCCA);
