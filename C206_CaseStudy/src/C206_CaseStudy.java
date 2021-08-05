@@ -403,8 +403,12 @@ public class C206_CaseStudy {
 				System.out.println("Empty inputs");
 			}
 			else {
-				studentList.remove(studentID);
-				System.out.println("Student is deleted successfully");
+				for (int i = 0; i < studentList.size(); i++) {
+					if (studentList.get(i).getID() == studentID) {
+						studentList.remove(studentID);
+						System.out.println("Student is deleted successfully");
+			}
+				}
 			}
 		} else {
 			System.out.println("No student to delete.");
