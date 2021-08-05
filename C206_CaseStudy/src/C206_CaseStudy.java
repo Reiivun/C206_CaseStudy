@@ -339,6 +339,36 @@ public class C206_CaseStudy {
 
 						viewStudentCCA(studentList.get(isLogin).getRegisteredCCA(), ccaList);
 					}
+					
+					// Update Child's details
+					else if (staffChoice == 7) {
+						Helper.line(30, "-");
+						System.out.println("UPDATE CHILD'S DETAILS");
+						Helper.line(30, "-");
+						
+						int userID = Helper.readInt("Enter id: ");
+						index = 0;
+						for (int i = 0; i < studentList.size(); i++) {
+							if (studentList.get(i).getID() == userID) {
+								index = i;
+								break;
+							}
+						}
+
+						String name = Helper.readString("Enter Child Name: ");
+						String password = Helper.readString("Enter Child password: ");
+						int primary = Helper.readInt("Enter Child primary: ");
+
+						if (name.isEmpty() || primary.isEmpty() || password.isEmpty()) {
+							System.out.println("Empty inputs!");
+						} 
+						else {
+							studentList.get(index).setName(name);
+							studentList.get(index).setPassword(password);
+							studentList.get(index).setPrimary(primary);
+							System.out.println("Updated Parent name");
+						}
+					}			
 
 					else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
@@ -348,8 +378,9 @@ public class C206_CaseStudy {
 				}
 			}
 		}
-
 	}
+
+				
 
 	// ALL METHODS BELOW FROM HERE
 
