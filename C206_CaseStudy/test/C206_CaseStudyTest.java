@@ -173,7 +173,6 @@ public class C206_CaseStudyTest {
 		//Given an empty list, after adding 1 parent, the size of the list is 1 - normal
 		//The item just added is as same as the first student of the list
 		C206_CaseStudy.addStudent(studentList, sl1);
-		
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
 		assertFalse(studentList.get(1).getparentName().isEmpty());
 		assertSame("Check that parent is added", sl1, studentList.get(0));
