@@ -165,6 +165,7 @@ public class C206_CaseStudyTest {
 		
 	}
 	
+	/*
 	//Add Parents
 	@Test
 	public void addParentTest() {
@@ -184,6 +185,7 @@ public class C206_CaseStudyTest {
 		assertFalse(studentList.get(2).getparentName().isEmpty());
 		assertSame("Check that parent is added", sl3, studentList.get(1));
 	}
+	*/
 	
 	//Retrieve all Parent
 		@Test
