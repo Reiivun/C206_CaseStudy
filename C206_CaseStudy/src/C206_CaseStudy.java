@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class C206_CaseStudy {
 
@@ -39,7 +40,27 @@ public class C206_CaseStudy {
 		int optionCover = Helper.readInt("Enter option: ");
 		if(optionCover==2) {
 			int studentID  = Helper.readInt("Enter student ID to register for CCA: ");
+			Random random = new Random();
+			String regID = "";
+			for(int i=0; i<5; i++) {
+				regID +="" + random.nextInt(10);
+			}
+			String password = regID;
+			String name = Helper.readString("Enter name: ");
+			int primary = Helper.readInt("Enter primary level: ");
+			String parentName = Helper.readString("Enter parent name: ");
+			ArrayList<Integer> studentCCA = new ArrayList<Integer>();
+
+			if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6
+					|| parentName.isEmpty()) {
+				System.out.println("Empty inputs!");
+			} else {
+				StudentList newStudent = new StudentList(studentID, password, name, "member",
+						primary, parentName, studentCCA);
+				addStudent(studentList, newStudent);
+			}
 			System.out.println("Registration sent to email of student ID\n");
+			System.out.println("Password " + password);
 		}
 		
 		
@@ -83,13 +104,14 @@ public class C206_CaseStudy {
 						String name = Helper.readString("Enter name: ");
 						int primary = Helper.readInt("Enter primary level: ");
 						String parentName = Helper.readString("Enter parent name: ");
+						ArrayList<Integer> studentCCA = new ArrayList<Integer>();
 
 						if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6
 								|| parentName.isEmpty()) {
 							System.out.println("Empty inputs!");
 						} else {
 							StudentList newStudent = new StudentList(studentList.size(), password, name, "member",
-									primary, parentName);
+									primary, parentName, studentCCA);
 							addStudent(studentList, newStudent);
 						}
 
