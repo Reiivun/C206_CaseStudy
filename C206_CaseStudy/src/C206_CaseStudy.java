@@ -359,6 +359,7 @@ public class C206_CaseStudy {
 						String password = Helper.readString("Enter Child password: ");
 						int primary = Helper.readInt("Enter Child primary: ");
 
+						//error
 						if (name.isEmpty() || primary.isEmpty() || password.isEmpty()) {
 							System.out.println("Empty inputs!");
 						} 
