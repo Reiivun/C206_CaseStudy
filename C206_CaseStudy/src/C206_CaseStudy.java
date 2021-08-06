@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -64,7 +63,7 @@ public class C206_CaseStudy {
 
 		loginMenu();
 
-		int userInputID = Helper.readInt("Enter your student ID: ");
+		int userInputID = Helper.readInt("Enter ID: ");
 		String userInputPassword = Helper.readString("Enter your registration ID: ");
 		int isLogin = loginCheck(userInputID, userInputPassword);
 
@@ -282,6 +281,11 @@ public class C206_CaseStudy {
 
 						C206_CaseStudy.editCCADetails(ccaList, ccaDetail, ccaId);
 					}
+					else if(staffChoice ==18) {
+						int ccaId = Helper.readInt("Enter CCA ID: ");
+						String ccaCategory = Helper.readString("Edit CCA category: ");
+						
+					}
 
 					else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
@@ -432,6 +436,7 @@ public class C206_CaseStudy {
 		System.out.println("15. Edit Category Details");
 		System.out.println("16. Delete category");
 		System.out.println("17. Edit CCA details");
+		System.out.println("18. Update category details");
 		System.out.println("20. Quit");
 
 	}
@@ -568,6 +573,8 @@ public class C206_CaseStudy {
 	}
 
 	// CCA DETAILS
+	
+	
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cc) {
 		 	
 		ccaList.add(cc);
