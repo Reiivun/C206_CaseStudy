@@ -266,16 +266,21 @@ public class C206_CaseStudy {
 						addCategories(category);
 
 					} else if (staffChoice == 15) {
-						// int id = categoryList.size() + 1;
 						int categoryId = Helper.readInt("Enter id of category: ");
 						String categoryDetails = Helper.readString("Edit Category details: ");
 
-						C206_CaseStudy.editCCADetails(categoryList, categoryDetails, categoryId);
+						C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
 					}
 
 					else if (staffChoice == 16) {
 						int id = Helper.readInt("Enter id: ");
 						deleteCategories(id);
+						
+					} else if (staffChoice == 17) {
+						int ccaId = Helper.readInt("Enter id of CCA: ");
+						String ccaDetail = Helper.readString("Edit CCA details: ");
+
+						C206_CaseStudy.editCCADetails(ccaList, ccaDetail, ccaId);
 					}
 
 					else if (staffChoice == OPTION_QUIT) {
@@ -340,6 +345,7 @@ public class C206_CaseStudy {
 						viewStudentCCA(studentList.get(isLogin).getRegisteredCCA(), ccaList);
 					}
 					
+					
 					// Update Child's details
 					else if (staffChoice == 7) {
 						Helper.line(30, "-");
@@ -368,9 +374,8 @@ public class C206_CaseStudy {
 							studentList.get(index).setPrimary(primary);
 							System.out.println("Updated Parent name");
 						}
-					}			
-
-					else if (staffChoice == OPTION_QUIT) {
+						
+					} else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
 					} else {
 						System.out.println("Invalid choice");
@@ -426,6 +431,7 @@ public class C206_CaseStudy {
 		System.out.println("14. Add category");
 		System.out.println("15. Edit Category Details");
 		System.out.println("16. Delete category");
+		System.out.println("17. Edit CCA details");
 		System.out.println("20. Quit");
 
 	}
@@ -603,6 +609,25 @@ public class C206_CaseStudy {
 			System.out.println("CCA is deleted successfully");
 		}
 	}
+	
+	public static void editCCADetails(ArrayList<CCA> ccaList, String ccaDetails, int ccaId) {
+		if (String.valueOf(ccaId).isEmpty()) {
+			System.out.println("Empty inputs");
+		}
+			if (ccaList.size() == 0) {
+				System.out.println("No CCA to edit.");
+			} else {
+				for (int i = 0; i < ccaList.size(); i++) {
+					CCA c = ccaList.get(i);
+
+					if (c.getCcaId() == ccaId) {
+						ccaList.get(i).setdescription(ccaDetails);
+						System.out.println("Successfully added");
+					}
+				}
+
+			}
+		}
 
 	public static void addStudentCCA(ArrayList<Integer> ccalist, int id) {
 		boolean check = false;
@@ -727,7 +752,7 @@ public class C206_CaseStudy {
 
 	}
 	
-	public static void editCCADetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
+	public static void editCategoryDetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
 		if (String.valueOf(categoryId).isEmpty()) {
 			System.out.println("Empty inputs");
 		}
