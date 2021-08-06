@@ -1,10 +1,12 @@
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class C206_CaseStudy {
 
 	static ArrayList<StudentList> studentList = new ArrayList<StudentList>();
 	static ArrayList<CCA> ccaList = new ArrayList<CCA>();
+	static ArrayList<Category> categoryList = new ArrayList<Category>();
 
 	private static final int OPTION_VIEW_STUDENT = 1;
 	private static final int OPTION_ADD_STUDENT = 2;
@@ -31,17 +33,48 @@ public class C206_CaseStudy {
 		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1));
 		studentList.add(new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2));
 
-		int userInputID = Helper.readInt("Enter your ID: ");
-		String userInputPassword = Helper.readString("Enter your password: ");
+		categoryList.add(new Category(1, "Sports", "Basic physical training", ccaList));
+		categoryList.add(new Category(2, "Uniform group", "UG", ccaList));
+
+		coverMenu();
+		int optionCover = Helper.readInt("Enter option: ");
+		if (optionCover == 2) {
+			int studentID = Helper.readInt("Enter student ID to register for CCA: ");
+			Random random = new Random();
+			String regID = "";
+			for (int i = 0; i < 5; i++) {
+				regID += "" + random.nextInt(10);
+			}
+			String password = regID;
+			String name = Helper.readString("Enter name: ");
+			int primary = Helper.readInt("Enter primary level: ");
+			String parentName = Helper.readString("Enter parent name: ");
+			ArrayList<Integer> studentCCA = new ArrayList<Integer>();
+
+			if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6 || parentName.isEmpty()) {
+				System.out.println("Empty inputs!");
+			} else {
+				StudentList newStudent = new StudentList(studentID, password, name, "member", primary, parentName,
+						studentCCA);
+				addStudent(studentList, newStudent);
+			}
+			System.out.println("Registration sent to email of student ID\n");
+			System.out.println("Password " + password);
+		}
+
+		loginMenu();
+
+		int userInputID = Helper.readInt("Enter your student ID: ");
+		String userInputPassword = Helper.readString("Enter your registration ID: ");
 		int isLogin = loginCheck(userInputID, userInputPassword);
 
 		while (isLogin == -1) {
 
 			Helper.line(30, "-");
-			System.out.println("Incorrect id or password");
+			System.out.println("Incorrect student or registration ID");
 			Helper.line(30, "-");
-			userInputID = Helper.readInt("Enter your ID: ");
-			userInputPassword = Helper.readString("Enter your password: ");
+			userInputID = Helper.readInt("Enter your student ID: ");
+			userInputPassword = Helper.readString("Enter your registration ID: ");
 			isLogin = loginCheck(userInputID, userInputPassword);
 
 		}
@@ -68,13 +101,14 @@ public class C206_CaseStudy {
 						String name = Helper.readString("Enter name: ");
 						int primary = Helper.readInt("Enter primary level: ");
 						String parentName = Helper.readString("Enter parent name: ");
+						ArrayList<Integer> studentCCA = new ArrayList<Integer>();
 
 						if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6
 								|| parentName.isEmpty()) {
 							System.out.println("Empty inputs!");
 						} else {
 							StudentList newStudent = new StudentList(studentList.size(), password, name, "member",
-									primary, parentName);
+									primary, parentName, studentCCA);
 							addStudent(studentList, newStudent);
 						}
 
@@ -221,6 +255,32 @@ public class C206_CaseStudy {
 									ccaList);
 						}
 
+					} else if (staffChoice == 13) {
+						viewCategories(categoryList);
+					} else if (staffChoice == 14) {
+						int id = categoryList.size() + 1;
+						String name = Helper.readString("Enter Category name: ");
+						String details = Helper.readString("Enter Category details: ");
+
+						Category category = new Category(id, name, details, ccaList);
+						addCategories(category);
+
+					} else if (staffChoice == 15) {
+						int categoryId = Helper.readInt("Enter id of category: ");
+						String categoryDetails = Helper.readString("Edit Category details: ");
+
+						C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
+					}
+
+					else if (staffChoice == 16) {
+						int id = Helper.readInt("Enter id: ");
+						deleteCategories(id);
+						
+					} else if (staffChoice == 17) {
+						int ccaId = Helper.readInt("Enter id of CCA: ");
+						String ccaDetail = Helper.readString("Edit CCA details: ");
+
+						C206_CaseStudy.editCCADetails(ccaList, ccaDetail, ccaId);
 					}
 
 					else if (staffChoice == OPTION_QUIT) {
@@ -284,8 +344,38 @@ public class C206_CaseStudy {
 
 						viewStudentCCA(studentList.get(isLogin).getRegisteredCCA(), ccaList);
 					}
+					
+					
+					// Update Child's details
+					else if (staffChoice == 7) {
+						Helper.line(30, "-");
+						System.out.println("UPDATE CHILD'S DETAILS");
+						Helper.line(30, "-");
+						
+						int userID = Helper.readInt("Enter id: ");
+						index = 0;
+						for (int i = 0; i < studentList.size(); i++) {
+							if (studentList.get(i).getID() == userID) {
+								index = i;
+								break;
+							}
+						}
 
-					else if (staffChoice == OPTION_QUIT) {
+						String name = Helper.readString("Enter Child Name: ");
+						String password = Helper.readString("Enter Child password: ");
+						int primary = Helper.readInt("Enter Child primary: ");
+
+						if (name.isEmpty() || String.valueOf(primary).isEmpty() || password.isEmpty()) {
+							System.out.println("Empty inputs!");
+						} 
+						else {
+							studentList.get(index).setName(name);
+							studentList.get(index).setPassword(password);
+							studentList.get(index).setPrimary(primary);
+							System.out.println("Updated Parent name");
+						}
+						
+					} else if (staffChoice == OPTION_QUIT) {
 						System.out.println("Program End");
 					} else {
 						System.out.println("Invalid choice");
@@ -293,8 +383,9 @@ public class C206_CaseStudy {
 				}
 			}
 		}
-
 	}
+
+				
 
 	// ALL METHODS BELOW FROM HERE
 
@@ -336,8 +427,22 @@ public class C206_CaseStudy {
 		System.out.println("10. Add CCA for Student");
 		System.out.println("11. Drop CCA for Student");
 		System.out.println("12. View Student's CCA");
+		System.out.println("13. View all categories");
+		System.out.println("14. Add category");
+		System.out.println("15. Edit Category Details");
+		System.out.println("16. Delete category");
+		System.out.println("17. Edit CCA details");
 		System.out.println("20. Quit");
 
+	}
+
+	public static void coverMenu() {
+		Helper.line(30, "-");
+		System.out.println("CCA REGISTRATION MENU");
+		Helper.line(30, "-");
+
+		System.out.println("1. Login");
+		System.out.println("2. Register");
 	}
 
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
@@ -464,7 +569,7 @@ public class C206_CaseStudy {
 
 	// CCA DETAILS
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cc) {
-
+		 	
 		ccaList.add(cc);
 		System.out.println("CCA have been added");
 	}
@@ -504,6 +609,25 @@ public class C206_CaseStudy {
 			System.out.println("CCA is deleted successfully");
 		}
 	}
+	
+	public static void editCCADetails(ArrayList<CCA> ccaList, String ccaDetails, int ccaId) {
+		if (String.valueOf(ccaId).isEmpty()) {
+			System.out.println("Empty inputs");
+		}
+			if (ccaList.size() == 0) {
+				System.out.println("No CCA to edit.");
+			} else {
+				for (int i = 0; i < ccaList.size(); i++) {
+					CCA c = ccaList.get(i);
+
+					if (c.getCcaId() == ccaId) {
+						ccaList.get(i).setdescription(ccaDetails);
+						System.out.println("Successfully added");
+					}
+				}
+
+			}
+		}
 
 	public static void addStudentCCA(ArrayList<Integer> ccalist, int id) {
 		boolean check = false;
@@ -613,6 +737,65 @@ public class C206_CaseStudy {
 				studentList.get(index).getRole(), studentList.get(index).getPrimary(),
 				studentList.get(index).getparentName());
 		System.out.println(output);
+	}
+
+	public static void viewCategories(ArrayList<Category> categoryList) {
+		String output = String.format("%-5s %-30s %-30s\n", "ID", "NAME", "DETAILS");
+
+		for (int i = 0; i < categoryList.size(); i++) {
+			if (!categoryList.get(i).getName().isEmpty()) {
+				output += String.format("%-5d %-30s %-30s\n", categoryList.get(i).getId(),
+						categoryList.get(i).getName(), categoryList.get(i).getDetails());
+			}
+		}
+		System.out.println(output);
+
+	}
+	
+	public static void editCategoryDetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
+		if (String.valueOf(categoryId).isEmpty()) {
+			System.out.println("Empty inputs");
+		}
+			if (categoryList.size() == 0) {
+				System.out.println("No Category to edit.");
+			} else {
+				for (int i = 0; i < categoryList.size(); i++) {
+					Category c = categoryList.get(i);
+
+					if (c.getId() == categoryId) {
+						categoryList.get(i).setDetails(categoryDetails);
+//						categoryList.set(categoryList.get(i).getId(), categoryDetails);
+						System.out.println("Successfully added");
+					}
+				}
+
+			}
+		}
+	
+	
+
+	public static void addCategories(Category category) {
+		if (category.getName().isEmpty() || category.getDetails().isEmpty()) {
+			System.out.println("Empty inputs");
+		} else {
+			categoryList.add(category);
+			System.out.println("Successfully added");
+		}
+	}
+
+	public static void deleteCategories(int id) {
+		boolean checker = false;
+		for (int i = 0; i < categoryList.size(); i++) {
+			if (categoryList.get(i).getId() == id) {
+				categoryList.remove((i));
+				checker = true;
+				break;
+			}
+		}
+
+		if (checker == false) {
+			System.out.println("Invalid id");
+		}
 	}
 
 }
