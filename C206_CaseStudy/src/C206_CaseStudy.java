@@ -140,7 +140,8 @@ public class C206_CaseStudy {
 				
 								}
 								else if (staffChoice == 3) {
-									deleteStudent(studentList);
+									int studentID = Helper.readInt("Enter Student ID: ");
+									deleteStudent(studentList, studentID);
 								}
 								else if (staffChoice == 4) {
 
@@ -581,12 +582,10 @@ public class C206_CaseStudy {
 		return output;
 	}
 
-	public static void deleteStudent(ArrayList<StudentList> studentList) {
+	public static void deleteStudent(ArrayList<StudentList> studentList, int studentID) {
 		Helper.line(30, "-");
 		System.out.println("DELETE STUDENT");
 		Helper.line(30, "-");
-
-		int studentID = Helper.readInt("Enter Student ID: ");
 
 		if (studentList.size() != 0) {
 			if (Integer.toString(studentID).isEmpty()) {
@@ -594,7 +593,7 @@ public class C206_CaseStudy {
 			} else {
 				for (int i = 0; i < studentList.size(); i++) {
 					if (studentList.get(i).getID() == studentID) {
-						studentList.remove(studentID);
+						studentList.remove(i);
 						System.out.println("Student is deleted successfully");
 					}
 				}
