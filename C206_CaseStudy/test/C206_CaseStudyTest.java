@@ -317,6 +317,25 @@ public class C206_CaseStudyTest {
 			
 		}
 		
+		@Test
+		public void editCCADetailsTest() {
+			// Test if parent list is not null but empty -boundary
+			assertNotNull("Test if there is valid parent arraylist to retrieve students", ccaList);
+			
+			//Given an empty list, after adding 3 items, test if the size of the list is 3 - normal
+			C206_CaseStudy.addCCA(ccaList, cc1);
+			C206_CaseStudy.addCCA(ccaList, cc2);
+			C206_CaseStudy.addCCA(ccaList, cc3);
+			assertEquals("Test that CCA arraylist size is 3", 3, ccaList.size());
+			
+			//test if the expected output string same as the list of student retrieved from the SourceCentre	
+			String ccaDetails= C206_CaseStudy.editCCADetails(ccaList, "Test 1" ,cc2.getCcaId());
+			String output = "Successfully added";
+		
+			assertEquals("Test that viewAllParent", output, ccaDetails);
+			
+		}
+		
 	
 	@After
 	public void tearDown() throws Exception {

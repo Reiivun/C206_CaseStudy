@@ -735,7 +735,7 @@ public class C206_CaseStudy {
 		}
 	}
 	
-	public static void editCCADetails(ArrayList<CCA> ccaList, String ccaDetails, int ccaId) {
+	public static String editCCADetails(ArrayList<CCA> ccaList, String ccaDetails, int ccaId) {
 		if (String.valueOf(ccaId).isEmpty()) {
 			System.out.println("Empty inputs");
 		}
@@ -752,6 +752,7 @@ public class C206_CaseStudy {
 				}
 
 			}
+			return ccaDetails;
 		}
 
 	public static void addStudentCCA(ArrayList<Integer> ccalist, int id) {
