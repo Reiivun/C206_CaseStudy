@@ -208,7 +208,8 @@ public class C206_CaseStudy {
 								staffChoice = Helper.readInt("Enter choice > ");
 								
 								if(staffChoice == 1) {
-									viewCategories(categoryList);
+									String a = viewCategories(categoryList);
+									System.out.println(a);
 								}
 								else if (staffChoice == 2) {
 									int id = categoryList.size() + 1;
@@ -216,17 +217,18 @@ public class C206_CaseStudy {
 									String details = Helper.readString("Enter Category details: ");
 
 									Category category = new Category(id, name, details, ccaList);
-									addCategories(category);
+									addCategories(categoryList, category);
 								}
 								else if (staffChoice == 3) {
 									int id = Helper.readInt("Enter id: ");
-									deleteCategories(id);
+									deleteCategories(categoryList, id);
 								}
 								else if (staffChoice == 4) {
 									int categoryId = Helper.readInt("Enter id of category: ");
 									String categoryDetails = Helper.readString("Edit Category details: ");
 
-									C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
+									String output = C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
+									System.out.println(output);
 								}
 								else if (staffChoice == 5) {
 									int ccaId = Helper.readInt("Enter CCA ID: ");
@@ -260,7 +262,8 @@ public class C206_CaseStudy {
 									addCCA(ccaList, newCCA);
 								}
 								else if (staffChoice == 3) {
-									C206_CaseStudy.deleteCCA(ccaList);
+									int ccaId = Helper.readInt("Enter CCA ID: ");
+									C206_CaseStudy.deleteCCA(ccaList, ccaId);
 								}
 								else if (staffChoice == 4) {
 									int ccaId = Helper.readInt("Enter id of CCA: ");
@@ -463,6 +466,7 @@ public class C206_CaseStudy {
 		System.out.println("1. STUDENT");
 		System.out.println("2. CATEGORIES");
 		System.out.println("3. CCA");
+		System.out.println("20. Quit");
 	}
 	
 	public static void AdminMenuStudent() {
@@ -718,12 +722,10 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void deleteCCA(ArrayList<CCA> ccaList) {
+	public static void deleteCCA(ArrayList<CCA> ccaList, int ccaId) {
 		Helper.line(30, "-");
 		System.out.println("DELETE CCA");
 		Helper.line(30, "-");
-
-		int ccaId = Helper.readInt("Enter CCA ID: ");
 
 		if (ccaId < 1) {
 			System.out.println("Empty inputs");
@@ -882,7 +884,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	public static void viewCategories(ArrayList<Category> categoryList) {
+	public static String viewCategories(ArrayList<Category> categoryList) {
 		String output = String.format("%-5s %-30s %-30s\n", "ID", "NAME", "DETAILS");
 
 		for (int i = 0; i < categoryList.size(); i++) {
@@ -891,16 +893,17 @@ public class C206_CaseStudy {
 						categoryList.get(i).getName(), categoryList.get(i).getDetails());
 			}
 		}
-		System.out.println(output);
+		return output;
 
 	}
 	
-	public static void editCategoryDetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
+	public static String editCategoryDetails(ArrayList<Category> categoryList, String categoryDetails, int categoryId) {
+		String output = "";
 		if (String.valueOf(categoryId).isEmpty()) {
-			System.out.println("Empty inputs");
+			output = ("Empty inputs");
 		}
 			if (categoryList.size() == 0) {
-				System.out.println("No Category to edit.");
+				output = ("No Category to edit.");
 			} else {
 				for (int i = 0; i < categoryList.size(); i++) {
 					Category c = categoryList.get(i);
@@ -908,16 +911,17 @@ public class C206_CaseStudy {
 					if (c.getId() == categoryId) {
 						categoryList.get(i).setDetails(categoryDetails);
 //						categoryList.set(categoryList.get(i).getId(), categoryDetails);
-						System.out.println("Successfully added");
+						output = ("Successfully added");
 					}
 				}
 
 			}
+			return output;
 		}
 	
 	
 
-	public static void addCategories(Category category) {
+	public static void addCategories(ArrayList<Category> categoryList, Category category) {
 		if (category.getName().isEmpty() || category.getDetails().isEmpty()) {
 			System.out.println("Empty inputs");
 		} else {
@@ -926,7 +930,7 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void deleteCategories(int id) {
+	public static void deleteCategories(ArrayList<Category> categoryList, int id) {
 		boolean checker = false;
 		for (int i = 0; i < categoryList.size(); i++) {
 			if (categoryList.get(i).getId() == id) {

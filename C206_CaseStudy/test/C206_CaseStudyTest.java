@@ -14,15 +14,17 @@ public class C206_CaseStudyTest {
 	private CCA cc1;
 	private CCA cc2;
 	private CCA cc3;
-
+	private Category ccc1;
+	private Category ccc2;
 
 	private ArrayList<StudentList> studentList;
 	private ArrayList<CCA> ccaList;
+	private ArrayList<Category> categoryList;
 	
 	public C206_CaseStudyTest() {
 		super();
 	}
-//
+////
 	@Before
 	public void setUp() throws Exception {
 		ArrayList<Integer> studentCCA1 = new ArrayList<Integer>();
@@ -39,8 +41,12 @@ public class C206_CaseStudyTest {
 		cc3 = new CCA(3,"Photograph", "Experience to take photographs", 25, "Friday", 2.30, 5.00,
 				"Photo room", "Annie");
 		
+		ccc1 = new Category(1, "Sports", "Basic physical training", ccaList);
+		ccc2 = new Category(2, "Uniform group", "UG", ccaList);
+		
 		studentList= new ArrayList<StudentList>();
 		ccaList= new ArrayList<CCA>();
+		categoryList = new ArrayList<Category>();
 
 
 	}
@@ -220,8 +226,97 @@ public class C206_CaseStudyTest {
 			C206_CaseStudy.deleteParent(studentList, sl3);
 			assertSame("Check that parent is deleted", "", sl3.getparentName());
 		}
-	
-	
+		
+		@Test
+		public void deleteCCATest() {
+			// Student list is not null, so that can add a new item - boundary
+			assertNotNull("Check if there is valid student arraylist to delete to", ccaList);
+			
+			C206_CaseStudy.addCCA(ccaList, cc1);
+			assertEquals("Check that CCA arraylist size is 1", 1, ccaList.size());
+			assertSame("Check that CCA is added", cc1, ccaList.get(0));
+			
+			C206_CaseStudy.addCCA(ccaList, cc2);
+			assertEquals("Check that CCA arraylist size is 2", 2, ccaList.size());
+			assertSame("Check that CCA is added", cc2, ccaList.get(1));
+			
+			C206_CaseStudy.deleteCCA(ccaList, cc2.getCcaId());
+			assertEquals("Check that CCA arraylist size is 1", 1, ccaList.size());
+			assertSame("Check that CCA is deleted", cc1, ccaList.get(0));
+			
+		}
+		
+		@Test
+		public void addCategoryTest() {
+			// Student list is not null, so that can add a new item - boundary
+			assertNotNull("Check if there is valid student arraylist to add to", categoryList);
+			
+			C206_CaseStudy.addCategories(categoryList, ccc1);
+			assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
+			assertSame("Check that category is added", ccc1, categoryList.get(0));
+			
+			C206_CaseStudy.addCategories(categoryList, ccc2);
+			assertEquals("Check that category arraylist size is 1", 2, categoryList.size());
+			assertSame("Check that category is added", ccc2, categoryList.get(1));
+			
+		}
+		
+		@Test
+		public void deleteCategoryTest() {
+			// Student list is not null, so that can add a new item - boundary
+			assertNotNull("Check if there is valid student arraylist to delete to", ccaList);
+			
+			C206_CaseStudy.addCategories(categoryList, ccc1);
+			assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
+			assertSame("Check that category is added", ccc1, categoryList.get(0));
+			
+			C206_CaseStudy.addCategories(categoryList, ccc2);
+			assertEquals("Check that category arraylist size is 1", 2, categoryList.size());
+			assertSame("Check that category is added", ccc2, categoryList.get(1));
+			
+			C206_CaseStudy.deleteCategories(categoryList, ccc2.getId());
+			assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
+			assertSame("Check that category is deleted", ccc1, categoryList.get(0));
+		}
+		
+		@Test
+		public void retrieveCategoriesTest() {
+			// Test if parent list is not null but empty -boundary
+			assertNotNull("Test if there is valid parent arraylist to retrieve students", categoryList);
+			
+			//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+			C206_CaseStudy.addCategories(categoryList, ccc1);
+			C206_CaseStudy.addCategories(categoryList, ccc2);
+			assertEquals("Test that Category arraylist size is 2", 2, categoryList.size());
+			
+			//test if the expected output string same as the list of student retrieved from the SourceCentre	
+			String allCategory= C206_CaseStudy.viewCategories(categoryList);
+			String testoutput = String.format("%-5s %-30s %-30s\n", "ID", "NAME", "DETAILS");
+			testoutput += String.format("%-5d %-30s %-30s\n", 1, "Sports", "Basic physical training");
+			testoutput += String.format("%-5d %-30s %-30s\n", 2, "Uniform group", "UG");
+		
+			assertEquals("Test that viewAllParent", testoutput, allCategory);
+			
+		}
+		
+		@Test
+		public void editCategoryDetailsTest() {
+			// Test if parent list is not null but empty -boundary
+			assertNotNull("Test if there is valid parent arraylist to retrieve students", categoryList);
+			
+			//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+			C206_CaseStudy.addCategories(categoryList, ccc1);
+			C206_CaseStudy.addCategories(categoryList, ccc2);
+			assertEquals("Test that Category arraylist size is 2", 2, categoryList.size());
+			
+			//test if the expected output string same as the list of student retrieved from the SourceCentre	
+			String categoryDetails= C206_CaseStudy.editCategoryDetails(categoryList, "Hi im lionel", ccc2.getId());
+			String testoutput = "Successfully added";
+		
+			assertEquals("Test that viewAllParent", testoutput, categoryDetails);
+			
+		}
+		
 	
 	@After
 	public void tearDown() throws Exception {
