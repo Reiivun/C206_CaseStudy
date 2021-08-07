@@ -336,6 +336,41 @@ public class C206_CaseStudyTest {
 			
 		}
 		
+		//Forgot Registration ID
+		@Test
+		public void forgotRegID() {
+			//Test that sms will only send when aswers are correct
+			
+			studentList.add(sl2);
+			
+			boolean result = false;
+			
+			String ans1 = "James";
+			String ans2 = "August";
+			
+			int index = C206_CaseStudy.getindexviaID(2, studentList);
+			if((ans1.equalsIgnoreCase(studentList.get(index).getQuestion1()[1]))&&(ans2.equalsIgnoreCase(studentList.get(index).getQuestion2()[1]))) {
+				System.out.println("Registration ID has been sent to email of Student ID: " + 2);
+				System.out.println("Password: " + studentList.get(index).getPassword());
+				result=true;
+			}else {
+				System.out.println("Wrong answer");
+				
+			}
+			
+			assertTrue(result);
+			
+			//Test that the correct questions will show for the student ID
+			
+			
+			assertEquals("Q1", studentList.get(index).getQuestion1()[0], "What is your father's name? ");
+			assertEquals("Q2", studentList.get(index).getQuestion2()[0], "What is your birth month? ");
+			
+			//Test that the sms will sent the registration ID of the correct student ID
+			
+			assertEquals(studentList.get(index).getPassword(), "2");	
+		}
+		
 	
 	@After
 	public void tearDown() throws Exception {

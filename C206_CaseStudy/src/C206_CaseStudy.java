@@ -72,7 +72,7 @@ public class C206_CaseStudy {
 					addStudent(studentList, newStudent);
 				}
 				System.out.println("Registration sent to email of student ID\n");
-				System.out.println("Password " + password);
+				System.out.println("Registration ID " + password);
 				
 				
 			} else if(optionCover == 3) {
@@ -83,7 +83,7 @@ public class C206_CaseStudy {
 					String ans2 = Helper.readString(studentList.get(index).getQuestion2()[0]);
 					if((ans1.equalsIgnoreCase(studentList.get(index).getQuestion1()[1]))&&(ans2.equalsIgnoreCase(studentList.get(index).getQuestion2()[1]))) {
 						System.out.println("Registration ID has been sent to email of Student ID: " + studentID);
-						System.out.println("Password: " + studentList.get(index).getPassword());
+						System.out.println("Registration ID: " + studentList.get(index).getPassword());
 					}else {
 						System.out.println("Wrong answer");
 					}
@@ -543,7 +543,7 @@ public class C206_CaseStudy {
 
 		System.out.println("1. Login");
 		System.out.println("2. Register");
-		System.out.println("3. Forgot password");
+		System.out.println("3. Forgot Registration ID");
 	}
 
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
