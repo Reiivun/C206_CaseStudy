@@ -317,6 +317,60 @@ public class C206_CaseStudyTest {
 			
 		}
 		
+		@Test
+		public void editCCADetailsTest() {
+			// Test if parent list is not null but empty -boundary
+			assertNotNull("Test if there is valid parent arraylist to retrieve students", ccaList);
+			
+			//Given an empty list, after adding 3 items, test if the size of the list is 3 - normal
+			C206_CaseStudy.addCCA(ccaList, cc1);
+			C206_CaseStudy.addCCA(ccaList, cc2);
+			C206_CaseStudy.addCCA(ccaList, cc3);
+			assertEquals("Test that CCA arraylist size is 3", 3, ccaList.size());
+			
+			//test if the expected output string same as the list of student retrieved from the SourceCentre	
+			String ccaDetails= C206_CaseStudy.editCCADetails(ccaList, "Test 1" ,cc2.getCcaId());
+			String output = "Test 1";
+		
+			assertEquals("Test that viewAllParent", output, ccaDetails);
+			
+		}
+		
+		//Forgot Registration ID
+		@Test
+		public void forgotRegID() {
+			//Test that sms will only send when aswers are correct
+			
+			studentList.add(sl2);
+			
+			boolean result = false;
+			
+			String ans1 = "James";
+			String ans2 = "August";
+			
+			int index = C206_CaseStudy.getindexviaID(2, studentList);
+			if((ans1.equalsIgnoreCase(studentList.get(index).getQuestion1()[1]))&&(ans2.equalsIgnoreCase(studentList.get(index).getQuestion2()[1]))) {
+				System.out.println("Registration ID has been sent to email of Student ID: " + 2);
+				System.out.println("Password: " + studentList.get(index).getPassword());
+				result=true;
+			}else {
+				System.out.println("Wrong answer");
+				
+			}
+			
+			assertTrue(result);
+			
+			//Test that the correct questions will show for the student ID
+			
+			
+			assertEquals("Q1", studentList.get(index).getQuestion1()[0], "What is your father's name? ");
+			assertEquals("Q2", studentList.get(index).getQuestion2()[0], "What is your birth month? ");
+			
+			//Test that the sms will sent the registration ID of the correct student ID
+			
+			assertEquals(studentList.get(index).getPassword(), "2");	
+		}
+		
 	
 	@After
 	public void tearDown() throws Exception {
