@@ -19,7 +19,10 @@ public class StudentList {
 	private int primary;
 	private String parentname;
 	private ArrayList<Integer> registeredCCA;
-	
+	private String[] question1;
+	private String[] question2;
+ 	
+
 	public StudentList(int id, String password, String name, String role) {
 		this.id = id;
 		this.password = password;
@@ -44,6 +47,19 @@ public class StudentList {
 		this.primary = primary;
 		this.parentname = parentname;
 		this.registeredCCA = registeredCCA;
+	}
+	
+	public StudentList(int id, String password, String name, String role, int primary, String parentname, ArrayList<Integer> registeredCCA, String[] question1, String[] question2) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.role = role;
+		this.primary = primary;
+		this.parentname = parentname;
+		this.registeredCCA = registeredCCA;
+		this.question1 = question1;
+		this.question2 = question2;
+		
 	}
 	
 	public int getID() {
@@ -91,6 +107,22 @@ public class StudentList {
 
 	public void setRegisteredCCA(ArrayList<Integer> registeredCCA) {
 		this.registeredCCA = registeredCCA;
+	}
+	
+	public String[] getQuestion1() {
+		return question1;
+	}
+
+	public void setQuestion1(String[] question1) {
+		this.question1 = question1;
+	}
+
+	public String[] getQuestion2() {
+		return question2;
+	}
+
+	public void setQuestion2(String[] question2) {
+		this.question2 = question2;
 	}
 	
 }

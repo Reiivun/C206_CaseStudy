@@ -28,365 +28,400 @@ public class C206_CaseStudy {
 
 		ArrayList<Integer> studentCCA1 = new ArrayList<Integer>();
 		ArrayList<Integer> studentCCA2 = new ArrayList<Integer>();
+		String[] qna1student1 = {"What is your father's name? ", "James"};
+		String[] qna2student1 = {"What is your birth month? ", "August"};
+		String[] qna1student2 = {"What is your mother's name? ", "Woman"};
+		String[] qna2student2 = {"What is your birth month? ", "July"};
 		studentList.add(new StudentList(1, "1", "Amy", "admin"));
-		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1));
-		studentList.add(new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2));
+		studentList.add(new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1, qna1student1, qna2student1));
+		studentList.add(new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2, qna1student2, qna2student2));
 
 		categoryList.add(new Category(1, "Sports", "Basic physical training", ccaList));
 		categoryList.add(new Category(2, "Uniform group", "UG", ccaList));
 
-		coverMenu();
-		int optionCover = Helper.readInt("Enter option: ");
-		if (optionCover == 2) {
-			int studentID = Helper.readInt("Enter student ID to register for CCA: ");
-			Random random = new Random();
-			String regID = "";
-			for (int i = 0; i < 5; i++) {
-				regID += "" + random.nextInt(10);
-			}
-			String password = regID;
-			String name = Helper.readString("Enter name: ");
-			int primary = Helper.readInt("Enter primary level: ");
-			String parentName = Helper.readString("Enter parent name: ");
-			ArrayList<Integer> studentCCA = new ArrayList<Integer>();
-
-			if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6 || parentName.isEmpty()) {
-				System.out.println("Empty inputs!");
-			} else {
-				StudentList newStudent = new StudentList(studentID, password, name, "member", primary, parentName,
-						studentCCA);
-				addStudent(studentList, newStudent);
-			}
-			System.out.println("Registration sent to email of student ID\n");
-			System.out.println("Password " + password);
-		}
-
-		loginMenu();
-
-		int userInputID = Helper.readInt("Enter ID: ");
-		String userInputPassword = Helper.readString("Enter your registration ID: ");
-		int isLogin = loginCheck(userInputID, userInputPassword);
-
-		while (isLogin == -1) {
-
-			Helper.line(30, "-");
-			System.out.println("Incorrect student or registration ID");
-			Helper.line(30, "-");
-			userInputID = Helper.readInt("Enter your student ID: ");
-			userInputPassword = Helper.readString("Enter your registration ID: ");
-			isLogin = loginCheck(userInputID, userInputPassword);
-
-		}
-
-		int staffChoice = 1;
-
-		if (!(isLogin == -1)) {
-			if (studentList.get(isLogin).getRole().equalsIgnoreCase("admin")) {
-
-				while (staffChoice != OPTION_QUIT) {
-
-					AdminMenu();
-					staffChoice = Helper.readInt("Enter choice > ");
-
-					if (staffChoice == OPTION_VIEW_STUDENT) {
-						viewAllStudent(studentList);
-
-					} else if (staffChoice == OPTION_ADD_STUDENT) {
-						Helper.line(30, "-");
-						System.out.println("ADD STUDENT");
-						Helper.line(30, "-");
-
-						String password = Helper.readString("Enter password: ");
-						String name = Helper.readString("Enter name: ");
-						int primary = Helper.readInt("Enter primary level: ");
-						String parentName = Helper.readString("Enter parent name: ");
-						ArrayList<Integer> studentCCA = new ArrayList<Integer>();
-
-						if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6
-								|| parentName.isEmpty()) {
-							System.out.println("Empty inputs!");
-						} else {
-							StudentList newStudent = new StudentList(studentList.size(), password, name, "member",
-									primary, parentName, studentCCA);
-							addStudent(studentList, newStudent);
-						}
-
-					} else if (staffChoice == OPTION_DELETE_STUDENT) {
-						C206_CaseStudy.deleteStudent(studentList);
-
-					} else if (staffChoice == OPTION_VIEW_CCA) {
-						Helper.line(30, "-");
-						System.out.println("VIEW CCA");
-						Helper.line(30, "-");
-
-						viewAllCCA(ccaList);
-
-					} else if (staffChoice == OPTION_ADD_CCA) {
-
-						Helper.line(30, "-");
-						System.out.println("ADD CCA");
-						Helper.line(30, "-");
-
-						String title = Helper.readString("Enter CCA title: ");
-						String description = Helper.readString("Enter CCA description: ");
-						int classSize = Helper.readInt("Enter CCA classSize: ");
-						String dayOfTheWeek = Helper.readString("Enter CCA day: ");
-						int startTime = Helper.readInt("Enter CCA start time: ");
-						int endTime = Helper.readInt("Enter CCA end time: ");
-						String venue = Helper.readString("Enter CCA venue: ");
-						String instructorName = Helper.readString("Enter CCA instructor name: ");
-
-						if (title.isEmpty() || description.isEmpty() || dayOfTheWeek.isEmpty() || venue.isEmpty()
-								|| instructorName.isEmpty()) {
-							System.out.println("Empty inputs!");
-						}
-
-						else {
-							CCA newCCA = new CCA(ccaList.size(), title, description, classSize, dayOfTheWeek, startTime,
-									endTime, venue, instructorName);
-							addCCA(ccaList, newCCA);
-						}
-
-					} else if (staffChoice == OPTION_DELETE_CCA) {
-						C206_CaseStudy.deleteCCA(ccaList);
-
-					} else if (staffChoice == OPTION_VIEW_PARENT) {
-						Helper.line(30, "-");
-						System.out.println("VIEW PARENT");
-						Helper.line(30, "-");
-
-						viewAllParent(studentList);
-					} else if (staffChoice == OPTION_UPDATE_PARENT) {
-
-						Helper.line(30, "-");
-						System.out.println("UPDATE PARENT");
-						Helper.line(30, "-");
-
-						int userID = Helper.readInt("Enter id: ");
-						int index = 0;
-						for (int i = 0; i < studentList.size(); i++) {
-							if (studentList.get(i).getID() == userID) {
-								index = i;
-								break;
-							}
-						}
-
-						String parentName = Helper.readString("Enter Parent Name: ");
-
-						if (parentName.isEmpty()) {
-							System.out.println("Empty inputs!");
-						} else {
-							if (studentList.get(index).getRole() == "member") {
-								studentList.get(index).setparentName(parentName);
-								System.out.println("Updated Parent name");
-							} else {
-								System.out.println("Wrong account used!");
-							}
-
-						}
-
-					} else if (staffChoice == OPTION_DELETE_PARENT) {
-						Helper.line(30, "-");
-						System.out.println("DELETE CCA");
-						Helper.line(30, "-");
-
-						int userID = Helper.readInt("Enter id: ");
-
-						int index = 0;
-						for (int i = 0; i < studentList.size(); i++) {
-							if (studentList.get(i).getID() == userID) {
-								index = i;
-								break;
-							}
-						}
-						if (studentList.get(index).getRole() == "member") {
-							studentList.get(index).setparentName("");
-							System.out.println("Deleted Parent name");
-						} else {
-							System.out.println("Wrong account used!");
-						}
-
-					} else if (staffChoice == 10) {
-						Helper.line(30, "-");
-						System.out.println("ADD CCA FOR STUDENT");
-						Helper.line(30, "-");
-						String studentName = Helper.readString("Enter student's name: ");
-						int CCAid = Helper.readInt("Enter ID of CCA to join: ");
-						if (getStudent(studentList, studentName) == -1) {
-							System.out.println("Invalid name");
-						} else {
-							if (checkccaID(ccaList, CCAid)) {
-								addStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(),
-										CCAid);
-							} else {
-								System.out.println("Invalid ID");
-							}
-
-						}
-
-					} else if (staffChoice == 11) {
-						Helper.line(30, "-");
-						System.out.println("DROP CCA FOR STUDENT");
-						Helper.line(30, "-");
-						String studentName = Helper.readString("Enter student's name: ");
-						int CCAid = Helper.readInt("Enter ID of CCA to drop: ");
-						if (getStudent(studentList, studentName) == -1) {
-							System.out.println("Invalid name");
-						} else {
-							if (checkccaID(ccaList, CCAid)) {
-								dropStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(),
-										CCAid);
-							} else {
-								System.out.println("Invalid ID");
-							}
-
-						}
-
-					} else if (staffChoice == 12) {
-						Helper.line(30, "-");
-						System.out.println("VIEW STUDENT'S JOINED CCA");
-						Helper.line(30, "-");
-						String studentName = Helper.readString("Enter student's name: ");
-						if (getStudent(studentList, studentName) == -1) {
-							System.out.println("Invalid name");
-						} else {
-							viewStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(),
-									ccaList);
-						}
-
-					} else if (staffChoice == 13) {
-						viewCategories(categoryList);
-					} else if (staffChoice == 14) {
-						int id = categoryList.size() + 1;
-						String name = Helper.readString("Enter Category name: ");
-						String details = Helper.readString("Enter Category details: ");
-
-						Category category = new Category(id, name, details, ccaList);
-						addCategories(category);
-
-					} else if (staffChoice == 15) {
-						int categoryId = Helper.readInt("Enter id of category: ");
-						String categoryDetails = Helper.readString("Edit Category details: ");
-
-						C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
+		boolean loop = true;
+		
+		while(loop==true) {
+			coverMenu();
+			int optionCover = Helper.readInt("Enter option: ");
+			
+			if (optionCover == 2) {
+				int studentID = Helper.readInt("Enter student ID to register for CCA: ");
+				Random random = new Random();
+				String regID = "";
+				for (int i = 0; i < 5; i++) {
+					regID += "" + random.nextInt(10);
+				}
+				String password = regID;
+				String name = Helper.readString("Enter name: ");
+				int primary = Helper.readInt("Enter primary level: ");
+				String parentName = Helper.readString("Enter parent name: ");
+				String q1 = Helper.readString("Enter security question 1: ");
+				String ans1 = Helper.readString("Enter answer for security question 1: ");
+				String q2 = Helper.readString("Enter security question 2: ");
+				String ans2 = Helper.readString("Enter answer for security question 2: ");
+				ArrayList<Integer> studentCCA = new ArrayList<Integer>();
+				String alQ1[] = {q1, ans1}; 
+				String alQ2[] = {q2, ans2};
+				
+				if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6 || parentName.isEmpty() || q1.isEmpty() || ans1.isEmpty() || q2.isEmpty() || ans2.isEmpty()) {
+					System.out.println("Invalid inputs!");
+				} else {
+					StudentList newStudent = new StudentList(studentID, password, name, "member", primary, parentName,
+							studentCCA, alQ1, alQ2);
+					addStudent(studentList, newStudent);
+				}
+				System.out.println("Registration sent to email of student ID\n");
+				System.out.println("Password " + password);
+				
+				
+			} else if(optionCover == 3) {
+				int studentID = Helper.readInt("Enter studentID: ");
+				if(existID(studentID, studentList)) {
+					int index = getindexviaID(studentID, studentList);
+					String ans1 = Helper.readString(studentList.get(index).getQuestion1()[0]);
+					String ans2 = Helper.readString(studentList.get(index).getQuestion2()[0]);
+					if((ans1.equalsIgnoreCase(studentList.get(index).getQuestion1()[1]))&&(ans2.equalsIgnoreCase(studentList.get(index).getQuestion2()[1]))) {
+						System.out.println("Registration ID has been sent to email of Student ID: " + studentID);
+						System.out.println("Password: " + studentList.get(index).getPassword());
+					}else {
+						System.out.println("Wrong answer");
 					}
+				}else {
+					System.out.println("Student ID is not registered");
+				}
+				
+			} else if(optionCover == 1) {
+				loginMenu();
 
-					else if (staffChoice == 16) {
-						int id = Helper.readInt("Enter id: ");
-						deleteCategories(id);
-						
-					} else if (staffChoice == 17) {
-						int ccaId = Helper.readInt("Enter id of CCA: ");
-						String ccaDetail = Helper.readString("Edit CCA details: ");
+				int userInputID = Helper.readInt("Enter student ID: ");
+				String userInputPassword = Helper.readString("Enter your registration ID: ");
+				int isLogin = loginCheck(userInputID, userInputPassword);
 
-						C206_CaseStudy.editCCADetails(ccaList, ccaDetail, ccaId);
-					}
-					else if(staffChoice ==18) {
-						int ccaId = Helper.readInt("Enter CCA ID: ");
-						String ccaCategory = Helper.readString("Edit CCA category: ");
-						
-					}
+				while (isLogin == -1) {
 
-					else if (staffChoice == OPTION_QUIT) {
-						System.out.println("Program End");
-					} else {
-						System.out.println("Invalid choice");
+					Helper.line(30, "-");
+					System.out.println("Incorrect student or registration ID");
+					Helper.line(30, "-");
+					userInputID = Helper.readInt("Enter your student ID: ");
+					userInputPassword = Helper.readString("Enter your registration ID: ");
+					isLogin = loginCheck(userInputID, userInputPassword);
+
+				}
+
+				int staffChoice = 1;
+
+				if (!(isLogin == -1)) {
+					if (studentList.get(isLogin).getRole().equalsIgnoreCase("admin")) {
+
+						while (staffChoice != OPTION_QUIT) {
+
+							AdminMenu();
+							staffChoice = Helper.readInt("Enter choice > ");
+
+							if (staffChoice == OPTION_VIEW_STUDENT) {
+								viewAllStudent(studentList);
+
+							} else if (staffChoice == OPTION_ADD_STUDENT) {
+								Helper.line(30, "-");
+								System.out.println("ADD STUDENT");
+								Helper.line(30, "-");
+
+								String password = Helper.readString("Enter password: ");
+								String name = Helper.readString("Enter name: ");
+								int primary = Helper.readInt("Enter primary level: ");
+								String parentName = Helper.readString("Enter parent name: ");
+								ArrayList<Integer> studentCCA = new ArrayList<Integer>();
+
+								if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6
+										|| parentName.isEmpty()) {
+									System.out.println("Empty inputs!");
+								} else {
+									StudentList newStudent = new StudentList(studentList.size(), password, name, "member",
+											primary, parentName, studentCCA);
+									addStudent(studentList, newStudent);
+								}
+
+							} else if (staffChoice == OPTION_DELETE_STUDENT) {
+								C206_CaseStudy.deleteStudent(studentList);
+
+							} else if (staffChoice == OPTION_VIEW_CCA) {
+								Helper.line(30, "-");
+								System.out.println("VIEW CCA");
+								Helper.line(30, "-");
+
+								viewAllCCA(ccaList);
+
+							} else if (staffChoice == OPTION_ADD_CCA) {
+
+								Helper.line(30, "-");
+								System.out.println("ADD CCA");
+								Helper.line(30, "-");
+
+								String title = Helper.readString("Enter CCA title: ");
+								String description = Helper.readString("Enter CCA description: ");
+								int classSize = Helper.readInt("Enter CCA classSize: ");
+								String dayOfTheWeek = Helper.readString("Enter CCA day: ");
+								int startTime = Helper.readInt("Enter CCA start time: ");
+								int endTime = Helper.readInt("Enter CCA end time: ");
+								String venue = Helper.readString("Enter CCA venue: ");
+								String instructorName = Helper.readString("Enter CCA instructor name: ");
+
+								if (title.isEmpty() || description.isEmpty() || dayOfTheWeek.isEmpty() || venue.isEmpty()
+										|| instructorName.isEmpty()) {
+									System.out.println("Empty inputs!");
+								}
+
+								else {
+									CCA newCCA = new CCA(ccaList.size(), title, description, classSize, dayOfTheWeek, startTime,
+											endTime, venue, instructorName);
+									addCCA(ccaList, newCCA);
+								}
+
+							} else if (staffChoice == OPTION_DELETE_CCA) {
+								C206_CaseStudy.deleteCCA(ccaList);
+
+							} else if (staffChoice == OPTION_VIEW_PARENT) {
+								Helper.line(30, "-");
+								System.out.println("VIEW PARENT");
+								Helper.line(30, "-");
+
+								viewAllParent(studentList);
+							} else if (staffChoice == OPTION_UPDATE_PARENT) {
+
+								Helper.line(30, "-");
+								System.out.println("UPDATE PARENT");
+								Helper.line(30, "-");
+
+								int userID = Helper.readInt("Enter id: ");
+								int index = 0;
+								for (int i = 0; i < studentList.size(); i++) {
+									if (studentList.get(i).getID() == userID) {
+										index = i;
+										break;
+									}
+								}
+
+								String parentName = Helper.readString("Enter Parent Name: ");
+
+								if (parentName.isEmpty()) {
+									System.out.println("Empty inputs!");
+								} else {
+									if (studentList.get(index).getRole() == "member") {
+										studentList.get(index).setparentName(parentName);
+										System.out.println("Updated Parent name");
+									} else {
+										System.out.println("Wrong account used!");
+									}
+
+								}
+
+							} else if (staffChoice == OPTION_DELETE_PARENT) {
+								Helper.line(30, "-");
+								System.out.println("DELETE CCA");
+								Helper.line(30, "-");
+
+								int userID = Helper.readInt("Enter id: ");
+
+								int index = 0;
+								for (int i = 0; i < studentList.size(); i++) {
+									if (studentList.get(i).getID() == userID) {
+										index = i;
+										break;
+									}
+								}
+								if (studentList.get(index).getRole() == "member") {
+									studentList.get(index).setparentName("");
+									System.out.println("Deleted Parent name");
+								} else {
+									System.out.println("Wrong account used!");
+								}
+
+							} else if (staffChoice == 10) {
+								Helper.line(30, "-");
+								System.out.println("ADD CCA FOR STUDENT");
+								Helper.line(30, "-");
+								String studentName = Helper.readString("Enter student's name: ");
+								int CCAid = Helper.readInt("Enter ID of CCA to join: ");
+								if (getStudent(studentList, studentName) == -1) {
+									System.out.println("Invalid name");
+								} else {
+									if (checkccaID(ccaList, CCAid)) {
+										addStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(),
+												CCAid);
+									} else {
+										System.out.println("Invalid ID");
+									}
+
+								}
+
+							} else if (staffChoice == 11) {
+								Helper.line(30, "-");
+								System.out.println("DROP CCA FOR STUDENT");
+								Helper.line(30, "-");
+								String studentName = Helper.readString("Enter student's name: ");
+								int CCAid = Helper.readInt("Enter ID of CCA to drop: ");
+								if (getStudent(studentList, studentName) == -1) {
+									System.out.println("Invalid name");
+								} else {
+									if (checkccaID(ccaList, CCAid)) {
+										dropStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(),
+												CCAid);
+									} else {
+										System.out.println("Invalid ID");
+									}
+
+								}
+
+							} else if (staffChoice == 12) {
+								Helper.line(30, "-");
+								System.out.println("VIEW STUDENT'S JOINED CCA");
+								Helper.line(30, "-");
+								String studentName = Helper.readString("Enter student's name: ");
+								if (getStudent(studentList, studentName) == -1) {
+									System.out.println("Invalid name");
+								} else {
+									viewStudentCCA(studentList.get(getStudent(studentList, studentName)).getRegisteredCCA(),
+											ccaList);
+								}
+
+							} else if (staffChoice == 13) {
+								viewCategories(categoryList);
+							} else if (staffChoice == 14) {
+								int id = categoryList.size() + 1;
+								String name = Helper.readString("Enter Category name: ");
+								String details = Helper.readString("Enter Category details: ");
+
+								Category category = new Category(id, name, details, ccaList);
+								addCategories(category);
+
+							} else if (staffChoice == 15) {
+								int categoryId = Helper.readInt("Enter id of category: ");
+								String categoryDetails = Helper.readString("Edit Category details: ");
+
+								C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
+							}
+
+							else if (staffChoice == 16) {
+								int id = Helper.readInt("Enter id: ");
+								deleteCategories(id);
+								
+							} else if (staffChoice == 17) {
+								int ccaId = Helper.readInt("Enter id of CCA: ");
+								String ccaDetail = Helper.readString("Edit CCA details: ");
+
+								C206_CaseStudy.editCCADetails(ccaList, ccaDetail, ccaId);
+							}
+							else if(staffChoice ==18) {
+								int ccaId = Helper.readInt("Enter CCA ID: ");
+								String ccaCategory = Helper.readString("Edit CCA category: ");
+								
+							}
+
+							else if (staffChoice == OPTION_QUIT) {
+								System.out.println("Program End");
+							} else {
+								System.out.println("Invalid choice");
+							}
+						}
+					} else if (studentList.get(isLogin).getRole().equalsIgnoreCase("member")) {
+						while (staffChoice != OPTION_QUIT) {
+							StudentMenu();
+							staffChoice = Helper.readInt("Enter choice > ");
+
+							int index = isLogin;
+
+							if (staffChoice == OPTION_VIEW_STUDENT) {
+								Helper.line(30, "-");
+								System.out.println("VIEW STUDENT");
+								Helper.line(30, "-");
+
+								viewStudent(studentList, index);
+
+							} else if (staffChoice == 2) {
+								Helper.line(30, "-");
+								System.out.println("VIEW CCA");
+								Helper.line(30, "-");
+
+								viewAllCCA(ccaList);
+							} else if (staffChoice == 3) {
+								Helper.line(30, "-");
+								System.out.println("VIEW PARENT");
+								Helper.line(30, "-");
+
+								retrieveParent(studentList, index);
+							} else if (staffChoice == 4) {
+								Helper.line(30, "-");
+								System.out.println("ADD CCA");
+								Helper.line(30, "-");
+
+								int CCAid = Helper.readInt("Enter ID of CCA to join: ");
+								if (checkccaID(ccaList, CCAid)) {
+									addStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
+								} else {
+									System.out.println("Invalid ID");
+								}
+
+							} else if (staffChoice == 5) {
+								Helper.line(30, "-");
+								System.out.println("DROP CCA");
+								Helper.line(30, "-");
+								int CCAid = Helper.readInt("Enter ID of CCA to drop: ");
+								if (checkccaID(ccaList, CCAid)) {
+									dropStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
+								} else {
+									System.out.println("Invalid ID");
+								}
+							} else if (staffChoice == 6) {
+								Helper.line(30, "-");
+								System.out.println("VIEW JOINED CCA");
+								Helper.line(30, "-");
+
+								viewStudentCCA(studentList.get(isLogin).getRegisteredCCA(), ccaList);
+							}
+							
+							
+							// Update Child's details
+							else if (staffChoice == 7) {
+								Helper.line(30, "-");
+								System.out.println("UPDATE CHILD'S DETAILS");
+								Helper.line(30, "-");
+								
+								int userID = Helper.readInt("Enter id: ");
+								index = 0;
+								for (int i = 0; i < studentList.size(); i++) {
+									if (studentList.get(i).getID() == userID) {
+										index = i;
+										break;
+									}
+								}
+
+								String name = Helper.readString("Enter Child Name: ");
+								String password = Helper.readString("Enter Child password: ");
+								int primary = Helper.readInt("Enter Child primary: ");
+
+								if (name.isEmpty() || String.valueOf(primary).isEmpty() || password.isEmpty()) {
+									System.out.println("Empty inputs!");
+								} 
+								else {
+									studentList.get(index).setName(name);
+									studentList.get(index).setPassword(password);
+									studentList.get(index).setPrimary(primary);
+									System.out.println("Updated Parent name");
+								}
+								
+							} else if (staffChoice == OPTION_QUIT) {
+								System.out.println("Program End");
+							} else {
+								System.out.println("Invalid choice");
+							}
+						}
 					}
 				}
-			} else if (studentList.get(isLogin).getRole().equalsIgnoreCase("member")) {
-				while (staffChoice != OPTION_QUIT) {
-					StudentMenu();
-					staffChoice = Helper.readInt("Enter choice > ");
-
-					int index = isLogin;
-
-					if (staffChoice == OPTION_VIEW_STUDENT) {
-						Helper.line(30, "-");
-						System.out.println("VIEW STUDENT");
-						Helper.line(30, "-");
-
-						viewStudent(studentList, index);
-
-					} else if (staffChoice == 2) {
-						Helper.line(30, "-");
-						System.out.println("VIEW CCA");
-						Helper.line(30, "-");
-
-						viewAllCCA(ccaList);
-					} else if (staffChoice == 3) {
-						Helper.line(30, "-");
-						System.out.println("VIEW PARENT");
-						Helper.line(30, "-");
-
-						retrieveParent(studentList, index);
-					} else if (staffChoice == 4) {
-						Helper.line(30, "-");
-						System.out.println("ADD CCA");
-						Helper.line(30, "-");
-
-						int CCAid = Helper.readInt("Enter ID of CCA to join: ");
-						if (checkccaID(ccaList, CCAid)) {
-							addStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
-						} else {
-							System.out.println("Invalid ID");
-						}
-
-					} else if (staffChoice == 5) {
-						Helper.line(30, "-");
-						System.out.println("DROP CCA");
-						Helper.line(30, "-");
-						int CCAid = Helper.readInt("Enter ID of CCA to drop: ");
-						if (checkccaID(ccaList, CCAid)) {
-							dropStudentCCA(studentList.get(isLogin).getRegisteredCCA(), CCAid);
-						} else {
-							System.out.println("Invalid ID");
-						}
-					} else if (staffChoice == 6) {
-						Helper.line(30, "-");
-						System.out.println("VIEW JOINED CCA");
-						Helper.line(30, "-");
-
-						viewStudentCCA(studentList.get(isLogin).getRegisteredCCA(), ccaList);
-					}
-					
-					
-					// Update Child's details
-					else if (staffChoice == 7) {
-						Helper.line(30, "-");
-						System.out.println("UPDATE CHILD'S DETAILS");
-						Helper.line(30, "-");
-						
-						int userID = Helper.readInt("Enter id: ");
-						index = 0;
-						for (int i = 0; i < studentList.size(); i++) {
-							if (studentList.get(i).getID() == userID) {
-								index = i;
-								break;
-							}
-						}
-
-						String name = Helper.readString("Enter Child Name: ");
-						String password = Helper.readString("Enter Child password: ");
-						int primary = Helper.readInt("Enter Child primary: ");
-
-						if (name.isEmpty() || String.valueOf(primary).isEmpty() || password.isEmpty()) {
-							System.out.println("Empty inputs!");
-						} 
-						else {
-							studentList.get(index).setName(name);
-							studentList.get(index).setPassword(password);
-							studentList.get(index).setPrimary(primary);
-							System.out.println("Updated Parent name");
-						}
-						
-					} else if (staffChoice == OPTION_QUIT) {
-						System.out.println("Program End");
-					} else {
-						System.out.println("Invalid choice");
-					}
-				}
 			}
 		}
+
+		
 	}
 
 				
@@ -448,6 +483,7 @@ public class C206_CaseStudy {
 
 		System.out.println("1. Login");
 		System.out.println("2. Register");
+		System.out.println("3. Forgot password");
 	}
 
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
@@ -718,6 +754,26 @@ public class C206_CaseStudy {
 					result = true;
 					break;
 				}
+			}
+		}
+		return result;
+	}
+	
+	public static boolean existID(int studentID, ArrayList<StudentList> studentList) {
+		boolean result = false;
+		for(int i=0; i<studentList.size();i++) {
+			if(studentID==studentList.get(i).getID()) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
+	public static int getindexviaID(int studentID, ArrayList<StudentList> studentList) {
+		int result = 0;
+		for(int i=0; i<studentList.size();i++) {
+			if(studentID==studentList.get(i).getID()) {
+				result = i;
 			}
 		}
 		return result;
