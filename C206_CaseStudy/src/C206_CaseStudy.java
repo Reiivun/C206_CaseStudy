@@ -126,7 +126,7 @@ public class C206_CaseStudy {
 						Helper.line(30, "-");
 						System.out.println("ADD CCA");
 						Helper.line(30, "-");
-
+						
 						String title = Helper.readString("Enter CCA title: ");
 						String description = Helper.readString("Enter CCA description: ");
 						int classSize = Helper.readInt("Enter CCA classSize: ");
@@ -142,7 +142,7 @@ public class C206_CaseStudy {
 						}
 
 						else {
-							CCA newCCA = new CCA(ccaList.size(), title, description, classSize, dayOfTheWeek, startTime,
+							CCA newCCA = new CCA(ccaList.size()+1, title, description, classSize, dayOfTheWeek, startTime,
 									endTime, venue, instructorName);
 							addCCA(ccaList, newCCA);
 						}
