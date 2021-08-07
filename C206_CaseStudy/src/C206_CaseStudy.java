@@ -118,7 +118,7 @@ public class C206_CaseStudy {
 
 							AdminMenuFront();
 							staffChoice = Helper.readInt("Enter choice > ");
-
+							int index = 0;
 							
 							if(staffChoice == 1) {
 								AdminMenuStudent();
@@ -154,7 +154,8 @@ public class C206_CaseStudy {
 									Helper.line(30, "-");
 
 									int userID = Helper.readInt("Enter id: ");
-									int index = 0;
+									index = 0;
+									
 									for (int i = 0; i < studentList.size(); i++) {
 										if (studentList.get(i).getID() == userID) {
 											index = i;
@@ -183,7 +184,7 @@ public class C206_CaseStudy {
 
 									int userID = Helper.readInt("Enter id: ");
 
-									int index = 0;
+									index = 0;
 									for (int i = 0; i < studentList.size(); i++) {
 										if (studentList.get(i).getID() == userID) {
 											index = i;
@@ -195,6 +196,32 @@ public class C206_CaseStudy {
 										System.out.println("Deleted Parent name");
 									} else {
 										System.out.println("Wrong account used!");
+									}
+								}
+								else if(staffChoice == 7) {
+									Helper.line(30, "-");
+									System.out.println("Update Student Details");
+									Helper.line(30, "-");
+									
+									int userID = Helper.readInt("Enter id: ");
+									index = 0;
+									for (int i = 0; i < studentList.size(); i++) {
+										if (studentList.get(i).getID() == userID) {
+											index = i;
+											break;
+										}
+									}
+
+									String name = Helper.readString("Enter Student Name: ");
+									int primary = Helper.readInt("Enter student primary: ");
+
+									if (name.isEmpty() || String.valueOf(primary).isEmpty()) {
+										System.out.println("Empty inputs!");
+									} 
+									else {
+										studentList.get(index).setName(name);
+										studentList.get(index).setPrimary(primary);
+										System.out.println("Updated children details");
 									}
 								}
 								else {
@@ -480,6 +507,7 @@ public class C206_CaseStudy {
 		System.out.println("4. View All Parent");
 		System.out.println("5. Update Parent");
 		System.out.println("6. Delete Parent");
+		System.out.println("7. Update Student details");
 	}
 	
 	public static void AdminMenuCategories() {
