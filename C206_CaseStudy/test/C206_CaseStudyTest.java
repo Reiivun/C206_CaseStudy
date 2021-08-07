@@ -330,7 +330,7 @@ public class C206_CaseStudyTest {
 			
 			//test if the expected output string same as the list of student retrieved from the SourceCentre	
 			String ccaDetails= C206_CaseStudy.editCCADetails(ccaList, "Test 1" ,cc2.getCcaId());
-			String output = "Successfully added";
+			String output = "Test 1";
 		
 			assertEquals("Test that viewAllParent", output, ccaDetails);
 			
