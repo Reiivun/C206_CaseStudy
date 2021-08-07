@@ -17,7 +17,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_UPDATE_PARENT = 8;
 	private static final int OPTION_DELETE_PARENT = 9;
 	private static final int OPTION_QUIT = 20;
-//
+////
 	public static void main(String args[]) {
 
 		ccaList.add(new CCA(1, "Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00, "Field", "Thomas"));
@@ -128,9 +128,6 @@ public class C206_CaseStudy {
 									viewAllStudent(studentList);
 								}
 								else if (staffChoice == 2) {
-									Helper.line(30, "-");
-									System.out.println("ADD STUDENT");
-									Helper.line(30, "-");
 
 									String password = Helper.readString("Enter password: ");
 									String name = Helper.readString("Enter name: ");
@@ -138,26 +135,19 @@ public class C206_CaseStudy {
 									String parentName = Helper.readString("Enter parent name: ");
 									ArrayList<Integer> studentCCA = new ArrayList<Integer>();
 
-									if (password.isEmpty() || name.isEmpty() || primary < 1 || primary > 6
-											|| parentName.isEmpty()) {
-										System.out.println("Empty inputs!");
-									} else {
-										StudentList newStudent = new StudentList(studentList.size(), password, name, "member",
-												primary, parentName, studentCCA);
-										addStudent(studentList, newStudent);
-									}
+									StudentList newStudent = new StudentList(studentList.size(), password, name, "member", primary, parentName, studentCCA);
+									addStudent(studentList, newStudent);
+				
 								}
 								else if (staffChoice == 3) {
 									deleteStudent(studentList);
 								}
 								else if (staffChoice == 4) {
-									Helper.line(30, "-");
-									System.out.println("VIEW PARENT");
-									Helper.line(30, "-");
 
 									viewAllParent(studentList);
 								}
 								else if (staffChoice == 5) {
+									
 									Helper.line(30, "-");
 									System.out.println("UPDATE PARENT");
 									Helper.line(30, "-");
@@ -250,17 +240,11 @@ public class C206_CaseStudy {
 								staffChoice = Helper.readInt("Enter choice > ");
 								
 								if(staffChoice == 1) {
-									Helper.line(30, "-");
-									System.out.println("VIEW CCA");
-									Helper.line(30, "-");
 
 									viewAllCCA(ccaList);
 								}
 								else if (staffChoice == 2) {
-									Helper.line(30, "-");
-									System.out.println("ADD CCA");
-									Helper.line(30, "-");
-
+									
 									String title = Helper.readString("Enter CCA title: ");
 									String description = Helper.readString("Enter CCA description: ");
 									int classSize = Helper.readInt("Enter CCA classSize: ");
@@ -269,17 +253,10 @@ public class C206_CaseStudy {
 									int endTime = Helper.readInt("Enter CCA end time: ");
 									String venue = Helper.readString("Enter CCA venue: ");
 									String instructorName = Helper.readString("Enter CCA instructor name: ");
-
-									if (title.isEmpty() || description.isEmpty() || dayOfTheWeek.isEmpty() || venue.isEmpty()
-											|| instructorName.isEmpty()) {
-										System.out.println("Empty inputs!");
-									}
-
-									else {
-										CCA newCCA = new CCA(ccaList.size(), title, description, classSize, dayOfTheWeek, startTime,
+									
+									CCA newCCA = new CCA(ccaList.size(), title, description, classSize, dayOfTheWeek, startTime,
 												endTime, venue, instructorName);
-										addCCA(ccaList, newCCA);
-									}
+									addCCA(ccaList, newCCA);
 								}
 								else if (staffChoice == 3) {
 									C206_CaseStudy.deleteCCA(ccaList);
@@ -291,6 +268,7 @@ public class C206_CaseStudy {
 									C206_CaseStudy.editCCADetails(ccaList, ccaDetail, ccaId);
 								}
 								else if (staffChoice == 5) {
+									
 									Helper.line(30, "-");
 									System.out.println("VIEW STUDENT'S JOINED CCA");
 									Helper.line(30, "-");
@@ -304,6 +282,7 @@ public class C206_CaseStudy {
 
 								}
 								else if(staffChoice == 6) {
+									
 									Helper.line(30, "-");
 									System.out.println("ADD CCA FOR STUDENT");
 									Helper.line(30, "-");
@@ -322,6 +301,7 @@ public class C206_CaseStudy {
 									}
 								}
 								else if(staffChoice == 7) {
+									
 									Helper.line(30, "-");
 									System.out.println("DROP CCA FOR STUDENT");
 									Helper.line(30, "-");
@@ -562,8 +542,19 @@ public class C206_CaseStudy {
 	}
 
 	public static void addStudent(ArrayList<StudentList> studentList, StudentList s) {
-		studentList.add(s);
-		System.out.println("Student " + s.getName() + " is added.");
+		
+		Helper.line(30, "-");
+		System.out.println("ADD STUDENT");
+		Helper.line(30, "-");
+		
+		if (s.getPassword().isEmpty() || s.getName().isEmpty() || s.getPrimary() < 1 || s.getPrimary() > 6
+				|| s.getparentName().isEmpty()) {
+			System.out.println("Empty inputs!");
+		}
+		else {
+			studentList.add(s);
+			System.out.println("Student " + s.getName() + " is added.");
+		}
 	}
 
 	public static void viewAllStudent(ArrayList<StudentList> studentList) {
@@ -653,7 +644,9 @@ public class C206_CaseStudy {
 	}
 
 	public static void viewAllParent(ArrayList<StudentList> studentList) {
+		Helper.line(30, "-");
 		System.out.println("PARENT LIST");
+		Helper.line(30, "-");
 		String output = String.format("%-15s %-15s\n", "STUDENT NAME", "PARENTS NAME");
 		output += retrieveAllParent(studentList);
 		System.out.println(output);
@@ -687,9 +680,19 @@ public class C206_CaseStudy {
 	
 	
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cc) {
-		 	
-		ccaList.add(cc);
-		System.out.println("CCA have been added");
+		
+		Helper.line(30, "-");
+		System.out.println("ADD CCA");
+		Helper.line(30, "-");
+		
+		if (cc.getTitle().isEmpty() || cc.getdescription().isEmpty() || cc.getDayOfTheWeek().isEmpty() || cc.getVenue().isEmpty()
+				|| cc.getInstructorName().isEmpty()) {
+			System.out.println("Empty inputs!");
+		}
+		else {
+			ccaList.add(cc);
+			System.out.println("CCA have been added");
+		}
 	}
 
 	public static String retrieveAllCCA(ArrayList<CCA> ccaList) {
@@ -706,6 +709,9 @@ public class C206_CaseStudy {
 	}
 
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
+		Helper.line(30, "-");
+		System.out.println("VIEW CCA");
+		Helper.line(30, "-");
 		String output = "===CCA DETAILS===";
 		output += String.format("\n%-10s %-10s %-35s %-10s %-10s %-10s %-10s %-15s %-10s\n", "ID", "NAME",
 				"DESCRIPTION", "CLASS SIZE", "CCA DAY", "START TIME", "END TIME", "VENUE", "INSTRUCTOR");
