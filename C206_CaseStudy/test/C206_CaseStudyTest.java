@@ -89,6 +89,23 @@ public class C206_CaseStudyTest {
 		
 	}
 	
+	// Update Student test
+	@Test
+	public void updateStudentTest() {
+		// Test if parent list is not null but empty -boundary
+		assertNotNull("Test if there is valid student arraylist to retrieve students", studentList);
+
+		C206_CaseStudy.addStudent(studentList, sl2);
+		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
+		assertSame("Check that student is added", sl2, studentList.get(0));
+		
+		 C206_CaseStudy.updateStudentDetails(studentList, "Tom", "hello", 4);
+		String testOutput = "Successfully added";
+		
+		assertEquals("Test that viewAllParent", studentList);
+		
+	}
+	
 	//Add CCA test
 	@Test
 	public void addCCATest() {

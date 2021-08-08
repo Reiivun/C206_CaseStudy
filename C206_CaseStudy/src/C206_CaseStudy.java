@@ -423,28 +423,11 @@ public class C206_CaseStudy {
 								System.out.println("UPDATE CHILD'S DETAILS");
 								Helper.line(30, "-");
 								
-								int userID = Helper.readInt("Enter id: ");
-								index = 0;
-								for (int i = 0; i < studentList.size(); i++) {
-									if (studentList.get(i).getID() == userID) {
-										index = i;
-										break;
-									}
-								}
+								String name = Helper.readString("Enter child name: ");
+								String password = Helper.readString("Enter password: ");
+								int primary = Helper.readInt("Enter primary: ");
 
-								String name = Helper.readString("Enter Child Name: ");
-								String password = Helper.readString("Enter Child password: ");
-								int primary = Helper.readInt("Enter Child primary: ");
-
-								if (name.isEmpty() || String.valueOf(primary).isEmpty() || password.isEmpty()) {
-									System.out.println("Empty inputs!");
-								} 
-								else {
-									studentList.get(index).setName(name);
-									studentList.get(index).setPassword(password);
-									studentList.get(index).setPrimary(primary);
-									System.out.println("Updated Parent name");
-								}
+								C206_CaseStudy.updateStudentDetails(studentList, name, password, primary);
 								
 							} else if (staffChoice == OPTION_QUIT) {
 								System.out.println("Program End");
@@ -481,6 +464,7 @@ public class C206_CaseStudy {
 		System.out.println("4. Add CCA");
 		System.out.println("5. Drop CCA");
 		System.out.println("6. View Joined CCA");
+		System.out.println("7. Update Student details");
 		System.out.println("20. Quit");
 
 	}
@@ -507,7 +491,6 @@ public class C206_CaseStudy {
 		System.out.println("4. View All Parent");
 		System.out.println("5. Update Parent");
 		System.out.println("6. Delete Parent");
-		System.out.println("7. Update Student details");
 	}
 	
 	public static void AdminMenuCategories() {
@@ -842,6 +825,25 @@ public class C206_CaseStudy {
 		}
 
 		System.out.println(output);
+	}
+	public static void updateStudentDetails(ArrayList<StudentList> studentList , String name, String password, int primary) {
+		
+		if(studentList.size()==0) {
+				System.out.println("No student to edit");
+			}
+			else {
+				for(int i=0;i<studentList.size();i++) {
+					StudentList s = studentList.get(i);
+					
+						studentList.get(i).setName(name);
+						studentList.get(i).setPassword(password);
+						studentList.get(i).setPrimary(primary);
+				}
+
+				System.out.println("Successfully updated");	
+			}
+		
+		
 	}
 
 	public static int getStudent(ArrayList<StudentList> studentlist, String name) {
