@@ -151,7 +151,7 @@ public class C206_CaseStudy {
 									String parentName = Helper.readString("Enter parent name: ");
 									ArrayList<Integer> studentCCA = new ArrayList<Integer>();
 
-									StudentList newStudent = new StudentList(studentList.size(), password, name, "member", primary, parentName, studentCCA);
+									StudentList newStudent = new StudentList(studentList.size()+1, password, name, "member", primary, parentName, studentCCA);
 									addStudent(studentList, newStudent);
 				
 								}
@@ -770,7 +770,7 @@ public class C206_CaseStudy {
 
 					if (c.getCcaId() == ccaId) {
 						ccaList.get(i).setdescription(ccaDetails);
-						System.out.println("Successfully added");
+						System.out.println("Successfully edited");
 					}
 				}
 
@@ -954,7 +954,7 @@ public class C206_CaseStudy {
 					if (c.getId() == categoryId) {
 						categoryList.get(i).setDetails(categoryDetails);
 //						categoryList.set(categoryList.get(i).getId(), categoryDetails);
-						output = ("Successfully added");
+						output = ("Successfully edited");
 					}
 				}
 
@@ -979,6 +979,7 @@ public class C206_CaseStudy {
 			if (categoryList.get(i).getId() == id) {
 				categoryList.remove((i));
 				checker = true;
+				System.out.println("Successfully deleted");
 				break;
 			}
 		}
