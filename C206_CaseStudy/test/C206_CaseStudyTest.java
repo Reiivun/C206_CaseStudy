@@ -388,6 +388,22 @@ public class C206_CaseStudyTest {
 			assertEquals(studentList.get(index).getPassword(), "2");	
 		}
 		
+		//View students registered for cca
+		@Test
+		public void viewStudentCCA() {
+		studentList.add(sl2);
+		ArrayList<Integer> templist = studentList.get(0).getRegisteredCCA();
+		ccaList.add(cc1);
+		C206_CaseStudy.addStudentCCA(templist, ccaList.get(0).getCcaId());
+		//Test that only existing CCAs can be seen.	
+		C206_CaseStudy.viewStudentCCA(templist ,ccaList);
+		int tempid = templist.get(0);
+		assertEquals(tempid, 1);
+		//Test that view CCA will open the corresponding CCAÅfs list.
+		int tempccaid = ccaList.get(0).getCcaId();
+		assertEquals(tempid, tempccaid);
+		}
+		
 	
 	@After
 	public void tearDown() throws Exception {
