@@ -7,17 +7,33 @@ public class C206_CaseStudy {
 	static ArrayList<CCA> ccaList = new ArrayList<CCA>();
 	static ArrayList<Category> categoryList = new ArrayList<Category>();
 
+	private static final int OPTION_FRONT_STUDENT = 1;
+	private static final int OPTION_FRONT_CATEGORIES = 2;
+	private static final int OPTION_FRONT_CCA = 3;
+	
 	private static final int OPTION_VIEW_STUDENT = 1;
 	private static final int OPTION_ADD_STUDENT = 2;
 	private static final int OPTION_DELETE_STUDENT = 3;
-	private static final int OPTION_VIEW_CCA = 4;
-	private static final int OPTION_ADD_CCA = 5;
-	private static final int OPTION_DELETE_CCA = 6;
-	private static final int OPTION_VIEW_PARENT = 7;
-	private static final int OPTION_UPDATE_PARENT = 8;
-	private static final int OPTION_DELETE_PARENT = 9;
+	private static final int OPTION_VIEW_PARENT = 4;
+	private static final int OPTION_UPDATE_PARENT = 5;
+	private static final int OPTION_DELETE_PARENT = 6;
+	private static final int OPTION_UPDATE_STUDENT = 7;
+	
+	private static final int OPTION_VIEW_CATEGORIES = 1;
+	private static final int OPTION_ADD_CATEGORY = 2;
+	private static final int OPTION_DELETE_CATEGORY = 3;
+	private static final int OPTION_EDIT_CATEGORY = 4;
+	
+	private static final int OPTION_VIEW_CCA = 1;
+	private static final int OPTION_ADD_CCA = 2;
+	private static final int OPTION_DELETE_CCA = 3;
+	private static final int OPTION_EDIT_CCA = 4;
+	private static final int OPTION_VIEW_STUDENTCCA = 5;
+	private static final int OPTION_ADD_STUDENTCCA = 6;
+	private static final int OPTION_DROP_STUDENTCCA = 7;
+	
 	private static final int OPTION_QUIT = 20;
-////
+//////
 	public static void main(String args[]) {
 
 		ccaList.add(new CCA(1, "Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00, "Field", "Thomas"));
@@ -120,14 +136,14 @@ public class C206_CaseStudy {
 							staffChoice = Helper.readInt("Enter choice > ");
 							int index = 0;
 							
-							if(staffChoice == 1) {
+							if(staffChoice == OPTION_FRONT_STUDENT) {
 								AdminMenuStudent();
 								staffChoice = Helper.readInt("Enter choice > ");
 								
-								if(staffChoice == 1) {
+								if(staffChoice == OPTION_VIEW_STUDENT) {
 									viewAllStudent(studentList);
 								}
-								else if (staffChoice == 2) {
+								else if (staffChoice == OPTION_ADD_STUDENT) {
 
 									String password = Helper.readString("Enter password: ");
 									String name = Helper.readString("Enter name: ");
@@ -139,15 +155,15 @@ public class C206_CaseStudy {
 									addStudent(studentList, newStudent);
 				
 								}
-								else if (staffChoice == 3) {
+								else if (staffChoice == OPTION_DELETE_STUDENT) {
 									int studentID = Helper.readInt("Enter Student ID: ");
 									deleteStudent(studentList, studentID);
 								}
-								else if (staffChoice == 4) {
+								else if (staffChoice == OPTION_VIEW_PARENT) {
 
 									viewAllParent(studentList);
 								}
-								else if (staffChoice == 5) {
+								else if (staffChoice == OPTION_UPDATE_PARENT) {
 									
 									Helper.line(30, "-");
 									System.out.println("UPDATE PARENT");
@@ -177,9 +193,9 @@ public class C206_CaseStudy {
 
 									}
 								}
-								else if(staffChoice == 6) {
+								else if(staffChoice == OPTION_DELETE_PARENT) {
 									Helper.line(30, "-");
-									System.out.println("DELETE CCA");
+									System.out.println("DELETE PARENT");
 									Helper.line(30, "-");
 
 									int userID = Helper.readInt("Enter id: ");
@@ -198,7 +214,7 @@ public class C206_CaseStudy {
 										System.out.println("Wrong account used!");
 									}
 								}
-								else if(staffChoice == 7) {
+								else if(staffChoice == OPTION_UPDATE_STUDENT) {
 									Helper.line(30, "-");
 									System.out.println("Update Student Details");
 									Helper.line(30, "-");
@@ -230,15 +246,15 @@ public class C206_CaseStudy {
 							}
 							
 							
-							else if(staffChoice == 2) {
+							else if(staffChoice == OPTION_FRONT_CATEGORIES) {
 								AdminMenuCategories();
 								staffChoice = Helper.readInt("Enter choice > ");
 								
-								if(staffChoice == 1) {
+								if(staffChoice == OPTION_VIEW_CATEGORIES) {
 									String a = viewCategories(categoryList);
 									System.out.println(a);
 								}
-								else if (staffChoice == 2) {
+								else if (staffChoice == OPTION_ADD_CATEGORY) {
 									int id = categoryList.size() + 1;
 									String name = Helper.readString("Enter Category name: ");
 									String details = Helper.readString("Enter Category details: ");
@@ -246,34 +262,30 @@ public class C206_CaseStudy {
 									Category category = new Category(id, name, details, ccaList);
 									addCategories(categoryList, category);
 								}
-								else if (staffChoice == 3) {
+								else if (staffChoice == OPTION_DELETE_CATEGORY) {
 									int id = Helper.readInt("Enter id: ");
 									deleteCategories(categoryList, id);
 								}
-								else if (staffChoice == 4) {
+								else if (staffChoice == OPTION_EDIT_CATEGORY) {
 									int categoryId = Helper.readInt("Enter id of category: ");
 									String categoryDetails = Helper.readString("Edit Category details: ");
 
 									String output = C206_CaseStudy.editCategoryDetails(categoryList, categoryDetails, categoryId);
 									System.out.println(output);
 								}
-								else if (staffChoice == 5) {
-									int ccaId = Helper.readInt("Enter CCA ID: ");
-									String ccaCategory = Helper.readString("Edit CCA category: ");
-								}
 								else {
 									System.out.println("Invalid Option!");
 								}
 							}
-							else if(staffChoice == 3) {
+							else if(staffChoice == OPTION_FRONT_CCA) {
 								AdminMenuCCA();
 								staffChoice = Helper.readInt("Enter choice > ");
 								
-								if(staffChoice == 1) {
+								if(staffChoice == OPTION_VIEW_CCA) {
 
 									viewAllCCA(ccaList);
 								}
-								else if (staffChoice == 2) {
+								else if (staffChoice == OPTION_ADD_CCA) {
 									
 									String title = Helper.readString("Enter CCA title: ");
 									String description = Helper.readString("Enter CCA description: ");
@@ -288,17 +300,17 @@ public class C206_CaseStudy {
 												endTime, venue, instructorName);
 									addCCA(ccaList, newCCA);
 								}
-								else if (staffChoice == 3) {
+								else if (staffChoice == OPTION_DELETE_CCA) {
 									int ccaId = Helper.readInt("Enter CCA ID: ");
 									C206_CaseStudy.deleteCCA(ccaList, ccaId);
 								}
-								else if (staffChoice == 4) {
+								else if (staffChoice == OPTION_EDIT_CCA) {
 									int ccaId = Helper.readInt("Enter id of CCA: ");
 									String ccaDetail = Helper.readString("Edit CCA details: ");
 
 									C206_CaseStudy.editCCADetails(ccaList, ccaDetail, ccaId);
 								}
-								else if (staffChoice == 5) {
+								else if (staffChoice == OPTION_VIEW_STUDENTCCA) {
 									
 									Helper.line(30, "-");
 									System.out.println("VIEW STUDENT'S JOINED CCA");
@@ -312,7 +324,7 @@ public class C206_CaseStudy {
 									}
 
 								}
-								else if(staffChoice == 6) {
+								else if(staffChoice == OPTION_ADD_STUDENTCCA) {
 									
 									Helper.line(30, "-");
 									System.out.println("ADD CCA FOR STUDENT");
@@ -331,7 +343,7 @@ public class C206_CaseStudy {
 
 									}
 								}
-								else if(staffChoice == 7) {
+								else if(staffChoice == OPTION_DROP_STUDENTCCA) {
 									
 									Helper.line(30, "-");
 									System.out.println("DROP CCA FOR STUDENT");
@@ -367,7 +379,7 @@ public class C206_CaseStudy {
 
 							int index = isLogin;
 
-							if (staffChoice == OPTION_VIEW_STUDENT) {
+							if (staffChoice == 1) {
 								Helper.line(30, "-");
 								System.out.println("VIEW STUDENT");
 								Helper.line(30, "-");
@@ -491,6 +503,7 @@ public class C206_CaseStudy {
 		System.out.println("4. View All Parent");
 		System.out.println("5. Update Parent");
 		System.out.println("6. Delete Parent");
+		System.out.println("7. Update Student Details");
 	}
 	
 	public static void AdminMenuCategories() {
@@ -502,7 +515,6 @@ public class C206_CaseStudy {
 		System.out.println("2. Add Category");
 		System.out.println("3. Delete Category");
 		System.out.println("4. Edit Category Details");
-		System.out.println("5. Update Category Details");
 	}
 	
 	public static void AdminMenuCCA() {
