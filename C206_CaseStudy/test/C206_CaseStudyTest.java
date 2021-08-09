@@ -29,9 +29,14 @@ public class C206_CaseStudyTest {
 	public void setUp() throws Exception {
 		ArrayList<Integer> studentCCA1 = new ArrayList<Integer>();
 		ArrayList<Integer> studentCCA2 = new ArrayList<Integer>();
+
+		String[] qna1student1 = {"What is your father's name? ", "James"};
+		String[] qna2student1 = {"What is your birth month? ", "August"};
+		String[] qna1student2 = {"What is your mother's name? ", "Woman"};
+		String[] qna2student2 = {"What is your birth month? ", "July"};
 		sl1 = new StudentList(1, "1", "Amy", "admin"); 
-		sl2 = new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1);
-		sl3 = new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2);
+		sl2 = new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1,  qna1student1, qna2student1);
+		sl3 = new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2, qna1student2, qna2student2);
 		sl4 = new StudentList(2, "2", "Tom", "member", 1, "", studentCCA1);
 		
 		cc1 = new CCA(1,"Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00,
