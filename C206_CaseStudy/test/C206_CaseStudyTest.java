@@ -29,9 +29,14 @@ public class C206_CaseStudyTest {
 	public void setUp() throws Exception {
 		ArrayList<Integer> studentCCA1 = new ArrayList<Integer>();
 		ArrayList<Integer> studentCCA2 = new ArrayList<Integer>();
+
+		String[] qna1student1 = {"What is your father's name? ", "James"};
+		String[] qna2student1 = {"What is your birth month? ", "August"};
+		String[] qna1student2 = {"What is your mother's name? ", "Woman"};
+		String[] qna2student2 = {"What is your birth month? ", "July"};
 		sl1 = new StudentList(1, "1", "Amy", "admin"); 
-		sl2 = new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1);
-		sl3 = new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2);
+		sl2 = new StudentList(2, "2", "Tom", "member", 1, "James", studentCCA1,  qna1student1, qna2student1);
+		sl3 = new StudentList(3, "3", "Sean", "member", 3, "Woman", studentCCA2, qna1student2, qna2student2);
 		sl4 = new StudentList(2, "2", "Tom", "member", 1, "", studentCCA1);
 		
 		cc1 = new CCA(1,"Sports", "Rock climbing,swimming etc", 10, "Monday", 3.00, 5.00,
@@ -386,6 +391,22 @@ public class C206_CaseStudyTest {
 			//Test that the sms will sent the registration ID of the correct student ID
 			
 			assertEquals(studentList.get(index).getPassword(), "2");	
+		}
+		
+		//View students registered for cca
+		@Test
+		public void viewStudentCCA() {
+		studentList.add(sl2);
+		ArrayList<Integer> templist = studentList.get(0).getRegisteredCCA();
+		ccaList.add(cc1);
+		C206_CaseStudy.addStudentCCA(templist, ccaList.get(0).getCcaId());
+		//Test that only existing CCAs can be seen.	
+		C206_CaseStudy.viewStudentCCA(templist ,ccaList);
+		int tempid = templist.get(0);
+		assertEquals(tempid, 1);
+		//Test that view CCA will open the corresponding CCAÅfs list.
+		int tempccaid = ccaList.get(0).getCcaId();
+		assertEquals(tempid, tempccaid);
 		}
 		
 	
