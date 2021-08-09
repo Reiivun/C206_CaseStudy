@@ -92,7 +92,7 @@ public class C206_CaseStudyTest {
 	// Update Student test
 	@Test
 	public void updateStudentTest() {
-		// Test if parent list is not null but empty -boundary
+		// Test if student list is not null but empty -boundary
 		assertNotNull("Test if there is valid student arraylist to retrieve students", studentList);
 
 		C206_CaseStudy.addStudent(studentList, sl2);
@@ -102,7 +102,7 @@ public class C206_CaseStudyTest {
 		 C206_CaseStudy.updateStudentDetails(studentList, "Tom", "hello", 4);
 		String testOutput = "Successfully added";
 		
-		assertEquals("Test that viewAllParent", studentList);
+		assertEquals("Test that viewAllStudent", studentList);
 		
 	}
 	
