@@ -94,7 +94,7 @@ public class C206_CaseStudy {
 			} else if(optionCover == 1) {
 				loginMenu();
 
-				int userInputID = Helper.readInt("Enter student ID: ");
+				int userInputID = Helper.readInt("Enter ID: ");
 				String userInputPassword = Helper.readString("Enter your registration ID: ");
 				int isLogin = loginCheck(userInputID, userInputPassword);
 
@@ -284,7 +284,7 @@ public class C206_CaseStudy {
 									String venue = Helper.readString("Enter CCA venue: ");
 									String instructorName = Helper.readString("Enter CCA instructor name: ");
 									
-									CCA newCCA = new CCA(ccaList.size(), title, description, classSize, dayOfTheWeek, startTime,
+									CCA newCCA = new CCA(ccaList.size()+1, title, description, classSize, dayOfTheWeek, startTime,
 												endTime, venue, instructorName);
 									addCCA(ccaList, newCCA);
 								}
@@ -577,7 +577,7 @@ public class C206_CaseStudy {
 		Helper.line(30, "-");
 		System.out.println("STUDENT LIST");
 		Helper.line(30, "-");
-		String output = String.format("%-10s %-20s\n", "NAME", "PRIMARY");
+		String output = String.format("%-10s %-10s %-20s\n","ID", "NAME", "PRIMARY");
 		output += retrieveAllStudent(studentList);
 		System.out.println(output);
 	}
@@ -587,7 +587,7 @@ public class C206_CaseStudy {
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
 				if (studentList.get(i).getRole() == "member") {
-					output += String.format("%-10s %-20d\n", studentList.get(i).getName(),
+					output += String.format("%-10d %-10s %-20d\n",studentList.get(i).getID(), studentList.get(i).getName(),
 							studentList.get(i).getPrimary());
 				}
 			}
@@ -647,7 +647,7 @@ public class C206_CaseStudy {
 		if (studentList.size() != 0) {
 			for (int i = 0; i < studentList.size(); i++) {
 				if (studentList.get(i).getRole() == "member") {
-					output += String.format("%-15s %-15s\n", studentList.get(i).getName(),
+					output += String.format("%-10d %-15s %-15s\n", studentList.get(i).getID() ,studentList.get(i).getName(),
 							studentList.get(i).getparentName());
 				}
 			}
@@ -661,7 +661,7 @@ public class C206_CaseStudy {
 		Helper.line(30, "-");
 		System.out.println("PARENT LIST");
 		Helper.line(30, "-");
-		String output = String.format("%-15s %-15s\n", "STUDENT NAME", "PARENTS NAME");
+		String output = String.format("%-10s %-15s %-15s\n","ID", "STUDENT NAME", "PARENTS NAME");
 		output += retrieveAllParent(studentList);
 		System.out.println(output);
 	}
