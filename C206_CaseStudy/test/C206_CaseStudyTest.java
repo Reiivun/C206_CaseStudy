@@ -360,6 +360,7 @@ public class C206_CaseStudyTest {
 			
 		}
 		
+		/*
 		@Test
 		public void updateStudentDetailsTest() {
 			// Test if student list is not null but empty -boundary
@@ -377,6 +378,7 @@ public class C206_CaseStudyTest {
 			assertEquals("Test that viewAllStudent", testoutput, studentDetails);
 			
 		}
+		*/
 		
 		//Forgot Registration ID
 		@Test
