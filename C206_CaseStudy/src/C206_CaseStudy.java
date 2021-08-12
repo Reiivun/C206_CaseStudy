@@ -442,7 +442,7 @@ public class C206_CaseStudy {
 								String password = Helper.readString("Enter password: ");
 								int primary = Helper.readInt("Enter primary: ");
 
-								C206_CaseStudy.updateStudentDetails(studentList, name, password, primary);
+								C206_CaseStudy.updateStudentDetails(studentList, name, password, primary, isLogin);
 								
 							} else if (staffChoice == OPTION_QUIT) {
 								System.out.println("Program End");
@@ -841,19 +841,19 @@ public class C206_CaseStudy {
 
 		System.out.println(output);
 	}
-	public static void updateStudentDetails(ArrayList<StudentList> studentList , String name, String password, int primary) {
+	public static void updateStudentDetails(ArrayList<StudentList> studentList , String name, String password, int primary, int index) {
 		
 		if(studentList.size()==0) {
 				System.out.println("No student to edit");
 			}
 			else {
-				for(int i=0;i<studentList.size();i++) {
-					StudentList s = studentList.get(i);
+				
+					StudentList s = studentList.get(index);
 					
-						studentList.get(i).setName(name);
-						studentList.get(i).setPassword(password);
-						studentList.get(i).setPrimary(primary);
-				}
+						studentList.get(index).setName(name);
+						studentList.get(index).setPassword(password);
+						studentList.get(index).setPrimary(primary);
+				
 
 				System.out.println("Successfully updated");	
 			}

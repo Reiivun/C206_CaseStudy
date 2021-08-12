@@ -104,7 +104,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
 		assertSame("Check that student is added", sl2, studentList.get(0));
 		
-		 C206_CaseStudy.updateStudentDetails(studentList, "Tom", "hello", 4);
+		 C206_CaseStudy.updateStudentDetails(studentList, "Tom", "hello", 4, 0);
 		String testOutput = "Successfully added";
 		
 		assertEquals("Test that viewAllStudent", studentList.get(0).getPassword(), "hello");
