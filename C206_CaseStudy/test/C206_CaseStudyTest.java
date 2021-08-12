@@ -148,8 +148,8 @@ public class C206_CaseStudyTest {
 		
 		//test if the expected output string same as the list of student retrieved from the SourceCentre	
 		allStudent= C206_CaseStudy.retrieveAllStudent(studentList);
-		testOutput = String.format("%-10s %-20d\n", "Tom", 1);
-		testOutput += String.format("%-10s %-20d\n", "Sean", 3);
+		testOutput = String.format("%-10d %-10s %-20d\n", 2, "Tom", 1);
+		testOutput += String.format("%-10d %-10s %-20d\n", 3, "Sean", 3);
 	
 		assertEquals("Test that viewAllStudent", testOutput, allStudent);
 		
