@@ -360,10 +360,28 @@ public class C206_CaseStudyTest {
 			
 		}
 		
+		@Test
+		public void updateStudentDetailsTest() {
+			// Test if student list is not null but empty -boundary
+			assertNotNull("Test if there is valid student arraylist to retrieve students", studentList);
+			
+			//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+			C206_CaseStudy.addStudent(studentList, sl2);
+			C206_CaseStudy.addStudent(studentList, sl3);
+			assertEquals("Test that Student arraylist size is 2", 2, categoryList.size());
+			
+			//test if the expected output string same as the list of student retrieved from the SourceCentre	
+			String studentDetails= C206_CaseStudy.updateStudentDetails(studentList, "lionel", "abc", "3", sl2);
+			String testoutput = "Successfully edited";
+		
+			assertEquals("Test that viewAllStudent", testoutput, studentDetails);
+			
+		}
+		
 		//Forgot Registration ID
 		@Test
 		public void forgotRegID() {
-			//Test that sms will only send when aswers are correct
+			//Test that sms will only send when answers are correct
 			
 			studentList.add(sl2);
 			
