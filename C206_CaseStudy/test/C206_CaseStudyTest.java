@@ -107,8 +107,9 @@ public class C206_CaseStudyTest {
 		 C206_CaseStudy.updateStudentDetails(studentList, "Tom", "hello", 4);
 		String testOutput = "Successfully added";
 		
-		assertEquals("Test that viewAllStudent", studentList);
-		
+		assertEquals("Test that viewAllStudent", studentList.get(0).getPassword(), "hello");
+		assertEquals("Test that viewAllStudent", studentList.get(0).getName(), "Tom");
+		assertEquals("Test that viewAllStudent", studentList.get(0).getPrimary(), 4);
 	}
 	
 	//Add CCA test
@@ -299,6 +300,7 @@ public class C206_CaseStudyTest {
 			C206_CaseStudy.deleteCategories(categoryList, ccc2.getId());
 			assertEquals("Check that category arraylist size is 1", 1, categoryList.size());
 			assertSame("Check that category is deleted", ccc1, categoryList.get(0));
+			System.out.println("Category has been deleted: Dance");
 		}
 		
 		@Test
@@ -333,7 +335,7 @@ public class C206_CaseStudyTest {
 			
 			//test if the expected output string same as the list of student retrieved from the SourceCentre	
 			String categoryDetails= C206_CaseStudy.editCategoryDetails(categoryList, "Hi im lionel", ccc2.getId());
-			String testoutput = "Successfully added";
+			String testoutput = "Successfully edited";
 		
 			assertEquals("Test that viewAllParent", testoutput, categoryDetails);
 			
@@ -404,7 +406,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.viewStudentCCA(templist ,ccaList);
 		int tempid = templist.get(0);
 		assertEquals(tempid, 1);
-		//Test that view CCA will open the corresponding CCAÅfs list.
+		//Test that view CCA will open the corresponding CCAÔøΩfs list.
 		int tempccaid = ccaList.get(0).getCcaId();
 		assertEquals(tempid, tempccaid);
 		}
