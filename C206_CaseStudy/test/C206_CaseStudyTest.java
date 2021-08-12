@@ -229,8 +229,8 @@ public class C206_CaseStudyTest {
 			
 			//test if the expected output string same as the list of student retrieved from the SourceCentre	
 			allParent= C206_CaseStudy.retrieveAllParent(studentList);
-			testOutput = String.format("%-15s %-15s\n", "Tom", "James");
-			testOutput += String.format("%-15s %-15s\n", "Sean", "Woman");
+			testOutput = String.format("%-10d %-15s %-15s\n", 2, "Tom", "James");
+			testOutput += String.format("%-10d %-15s %-15s\n", 3, "Sean", "Woman");
 		
 			assertEquals("Test that viewAllParent", testOutput, allParent);
 			
@@ -406,7 +406,7 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.viewStudentCCA(templist ,ccaList);
 		int tempid = templist.get(0);
 		assertEquals(tempid, 1);
-		//Test that view CCA will open the corresponding CCA�fs list.
+		//Test that view CCA will open the corresponding CCAs list.
 		int tempccaid = ccaList.get(0).getCcaId();
 		assertEquals(tempid, tempccaid);
 		}
