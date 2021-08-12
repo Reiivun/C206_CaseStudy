@@ -366,6 +366,9 @@ public class C206_CaseStudy {
 									System.out.println("Invalid Option!");
 								}
 							}
+							else if(staffChoice == 20) {
+								System.out.println("Program End");
+							}
 							else {
 								System.out.println("Invalid Option Selected");
 							}
